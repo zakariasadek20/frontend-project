@@ -1,3 +1,4 @@
+import { HomeComponent } from './components/partials/home/home.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler, Injectable } from '@angular/core';
 import { HttpErrorResponse } from "@angular/common/http";
@@ -83,7 +84,8 @@ export class SentryErrorHandler implements ErrorHandler {
     AppComponent,
     LaoderComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
