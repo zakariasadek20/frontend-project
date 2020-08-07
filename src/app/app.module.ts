@@ -11,6 +11,11 @@ import { LaoderComponent } from './components/partials/laoder/laoder.component';
 import { HeaderComponent } from './components/partials/header/header.component';
 import { FooterComponent } from './components/partials/footer/footer.component';
 import * as Sentry from "@sentry/browser";
+import { HomeSearchComponent } from './components/home-search/home-search.component';
+import { HomeClinicSpecialitiesComponent } from './components/home-clinic-specialities/home-clinic-specialities.component';
+import { HomeBookDoctorComponent } from './components/home-book-doctor/home-book-doctor.component';
+import { HomeAvailableFeaturesComponent } from './components/home-available-features/home-available-features.component';
+import { HomeBlogSectionComponent } from './components/home-blog-section/home-blog-section.component';
 
 Sentry.init({
   dsn: "https://f9c730986abe4b5db39f20d6ce29e3a1@o381431.ingest.sentry.io/5378176",
@@ -85,7 +90,12 @@ export class SentryErrorHandler implements ErrorHandler {
     LaoderComponent,
     HeaderComponent,
     FooterComponent,
-    HomeComponent
+    HomeComponent,
+    HomeSearchComponent,
+    HomeClinicSpecialitiesComponent,
+    HomeBookDoctorComponent,
+    HomeAvailableFeaturesComponent,
+    HomeBlogSectionComponent,
   ],
   imports: [
     BrowserModule,
