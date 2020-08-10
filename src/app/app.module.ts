@@ -16,6 +16,7 @@ import { HomeClinicSpecialitiesComponent } from './components/home-clinic-specia
 import { HomeBookDoctorComponent } from './components/home-book-doctor/home-book-doctor.component';
 import { HomeAvailableFeaturesComponent } from './components/home-available-features/home-available-features.component';
 import { HomeBlogSectionComponent } from './components/home-blog-section/home-blog-section.component';
+import { SearchDoctorComponent } from './components/search-doctor/search-doctor.component';
 
 Sentry.init({
   dsn: "https://f9c730986abe4b5db39f20d6ce29e3a1@o381431.ingest.sentry.io/5378176",
@@ -96,6 +97,7 @@ export class SentryErrorHandler implements ErrorHandler {
     HomeBookDoctorComponent,
     HomeAvailableFeaturesComponent,
     HomeBlogSectionComponent,
+    SearchDoctorComponent,
   ],
   imports: [
     BrowserModule,
