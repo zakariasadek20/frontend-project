@@ -9,16 +9,20 @@
 
           <!-- Search -->
           <div class="search-box">
-            <form action="search">
+            <!-- reactive form -->
+            <form [formGroup]="searchForm" (ngSubmit)="search()">
               <div class="form-group search-location">
-                <input type="text" class="form-control" placeholder="Rechercher par ville">
-                <span class="form-text">Selon votre emplacement</span>
+                <input formControlName="location" type="text" class="form-control" placeholder="Rechercher par ville">
+                <span *ngIf="!searchForm.get('location').value" class="form-text">Selon votre emplacement</span>
+                <!-- condition dyal erro ila kane champs dyalna fih 9el mn 4 dyal 7orof -->
+                <span *ngIf="searchForm.get('location').getError('minlength')" class="form-text"> Entrer plus que 4 charachter </span>
               </div>
               <div class="form-group search-info">
-                <input type="text" class="form-control" placeholder="Rechercher des médecins, des cliniques, des hôpitaux, etc.">
+                <input formControlName="search" type="text" class="form-control" placeholder="Rechercher des médecins, des cliniques, des hôpitaux, etc.">
                 <span class="form-text">Ex : Contrôle dentaire ou sucre, etc.</span>
               </div>
-              <button type="submit" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>Chercher</span></button>
+              <!-- si le champ location fih 9el men 4 tikone mdezactivi -->
+              <button [disabled]="searchForm.get('location').getError('minlength')" type="submit" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>Chercher</span></button>
             </form>
           </div>
           <!-- /Search -->

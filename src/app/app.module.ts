@@ -1,7 +1,7 @@
 import { HomeComponent } from './components/partials/home/home.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler, Injectable } from '@angular/core';
-import { HttpErrorResponse } from "@angular/common/http";
+import { HttpErrorResponse, HttpClientModule } from "@angular/common/http";
 
 import { environment } from "../environments/environment";
 
@@ -17,6 +17,7 @@ import { HomeBookDoctorComponent } from './components/home-book-doctor/home-book
 import { HomeAvailableFeaturesComponent } from './components/home-available-features/home-available-features.component';
 import { HomeBlogSectionComponent } from './components/home-blog-section/home-blog-section.component';
 import { SearchDoctorComponent } from './components/search-doctor/search-doctor.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 Sentry.init({
   dsn: "https://f9c730986abe4b5db39f20d6ce29e3a1@o381431.ingest.sentry.io/5378176",
@@ -101,7 +102,10 @@ export class SentryErrorHandler implements ErrorHandler {
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [{ provide: ErrorHandler, useClass: SentryErrorHandler }],
   bootstrap: [AppComponent]
