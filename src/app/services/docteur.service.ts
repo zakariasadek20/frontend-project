@@ -17,4 +17,7 @@ export class DocteurService {
     return this.http.post(`${environment.baseUrl}/docteurs/distance`, { latitude: latitude, longitude: longitude, zone: zone });
   }
 
+  getByspecialiti(id){
+    return this.http.post(`${environment.baseUrl}/specialites/docteurs`,{specialite_id:id} );
+  }
 }
