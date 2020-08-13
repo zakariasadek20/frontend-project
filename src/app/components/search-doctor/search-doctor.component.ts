@@ -15,13 +15,17 @@ export class SearchDoctorComponent implements OnInit {
   zone = 1;//1km
   villeName: string;
 
-  constructor(private route: ActivatedRoute, private docteurService: DocteurService) { }
+  constructor(private route: ActivatedRoute, private docteurService: DocteurService) {
+    this.latitude = localStorage.getItem('latitude');
+    this.longitude = localStorage.getItem('longitude');
+  }
   ngOnInit(): void {
 
     /* api pour capter la location */
     this.type = this.route.snapshot.queryParamMap.get('type');
-    if (this.type == 'distance') {
+    if (this.type === 'distance') {
       this.getUserLocation();
+
       this.docteurService.getByDistance(this.latitude, this.longitude, this.zone).subscribe(
         (docteurs) => {
           this.docteurs = docteurs['data'];
@@ -34,8 +38,9 @@ export class SearchDoctorComponent implements OnInit {
         this.docteurs = docteurs['data'];
 
       }
-      )
+      );
     }
+
 
   }
 
@@ -47,8 +52,10 @@ export class SearchDoctorComponent implements OnInit {
     navigator.geolocation.getCurrentPosition((position) => {
       const coords = position.coords;
       const latLong = [coords.latitude, coords.longitude];
-      this.latitude = position.coords.latitude;
-      this.longitude = position.coords.longitude;
+      const lat = position.coords.latitude;
+      const long = position.coords.longitude;
+      localStorage.setItem('latitude', lat.toString());
+      localStorage.setItem('longitude', long.toString());
     });
   }
 

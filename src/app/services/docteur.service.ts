@@ -10,7 +10,7 @@ export class DocteurService {
   constructor(private http: HttpClient) { }
   /* service dyal api hada */
   getByVille(ville) {
-    return this.http.post(`http://127.0.0.1:8000/api/docteurs/ville`, { ville_name: ville });
+    return this.http.post(`${environment.baseUrl}/docteurs/ville`, { ville_name: ville });
   }
 
   getByDistance(latitude, longitude, zone) {
