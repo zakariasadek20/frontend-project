@@ -12,21 +12,40 @@ import { Specialitie } from 'src/app/Models/specialitie';
 
 export class SearchDoctorComponent implements OnInit {
 
+  // array in which we receive the list of doctors
   docteurs: any = [];
-  type: string;
-  latitude;
-  longitude;
-  zone = 1;//1km
-  villeName: string;
 
+  // array in which we receive the list of specialities
   specialities: any = [];
 
+  // array in which we receive the id of specialitie seledcted
+  SelectedSpesialites = [];
+
+  // queryParam type of search "ville","distance"
+  type: string;
+
+  // we store latitude of user
+  latitude;
+
+  // we store longitude of user
+  longitude;
+
+  // we store zone of search
+  zone = 1; // 1km
+
+  // ueryParam villeName if 'type' == 'ville'
+  villeName: string;
+
+
+
   constructor(private route: ActivatedRoute,
-    private docteurService: DocteurService,
-    private specialieService: SpecialitieService) {
+              private docteurService: DocteurService,
+              private specialieService: SpecialitieService) {
     this.latitude = localStorage.getItem('latitude');
     this.longitude = localStorage.getItem('longitude');
   }
+
+
   ngOnInit(): void {
 
     /* api pour capter la location */
@@ -49,10 +68,8 @@ export class SearchDoctorComponent implements OnInit {
       );
     }
 
-
     /* load specialities */
     this.getAllSpecialiti();
-
 
   }
 
@@ -71,27 +88,31 @@ export class SearchDoctorComponent implements OnInit {
     });
   }
 
-/* njibo specilalities mn backend */
+  /* njibo specilalities mn backend */
   getAllSpecialiti() {
     this.specialieService.getall().subscribe((specialities) => {
       this.specialities = specialities['data'];
-    }
-
-    )
+    });
 
   }
-SelectedSpesialites:Array<Specialitie>=[];
 
-  getBySpecialitie(event,idSpecialite){
-    let isChecked : boolean= event.target.checked;
-    if (isChecked){
-      this.SelectedSpesialites.push({id:idSpecialite});
-      this.docteurService.getByspecialiti(this.SelectedSpesialites).subscribe((docteurs)=> {
+  getBySpecialitie(event, idSpecialite) {
+    const isChecked: boolean = event.target.checked;
+
+    if (isChecked) {
+      this.SelectedSpesialites = [...this.SelectedSpesialites, idSpecialite];
+    } else {
+      this.SelectedSpesialites = this.SelectedSpesialites.filter((id) => id !== idSpecialite);
+    }
+
+    if (this.SelectedSpesialites.length > 0) {
+      this.docteurService.getByspecialiti(this.SelectedSpesialites).subscribe((docteurs) => {
         this.docteurs = docteurs['data'];
-        console.log(docteurs);
-
-      })
-
+        // console.log(docteurs);
+      });
+    }
+    else {
+      this.docteurs = [];
     }
 
   }
