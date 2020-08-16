@@ -5,13 +5,13 @@
       <div class="col-md-8 col-12">
         <nav aria-label="breadcrumb" class="page-breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Search</li>
+            <li class="breadcrumb-item"><a href="index">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Chercher</li>
           </ol>
         </nav>
-        <h2 class="breadcrumb-title">2245 matches found for : Dentist In Bangalore</h2>
+        <h2 class="breadcrumb-title">{{  docteurs.length }} correspondances trouvées . <!--for : Dentist In Bangalore--></h2>
       </div>
-      <div class="col-md-4 col-12 d-md-block d-none">
+      <!-- <div class="col-md-4 col-12 d-md-block d-none">
         <div class="sort-by">
           <span class="sort-title">Sort by</span>
           <span class="sortby-fliter">
@@ -24,7 +24,7 @@
             </select>
           </span>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
@@ -40,15 +40,15 @@
         <!-- Search Filter -->
         <div class="card search-filter">
           <div class="card-header">
-            <h4 class="card-title mb-0">Search Filter</h4>
+            <h4 class="card-title mb-0">Filtre de recherche</h4>
           </div>
           <div class="card-body">
-            <div class="filter-widget">
+            <!-- <div class="filter-widget">
               <div class="cal-icon">
                 <input type="text" class="form-control datetimepicker" placeholder="Select Date">
               </div>
-            </div>
-            <div class="filter-widget">
+            </div> -->
+            <!-- <div class="filter-widget">
               <h4>Gender</h4>
               <div>
                 <label class="custom_check">
@@ -62,7 +62,7 @@
                   <span class="checkmark"></span> Female Doctor
                 </label>
               </div>
-            </div>
+            </div> -->
             <div class="filter-widget">
               <h4>Select Specialist</h4>
 
@@ -156,17 +156,17 @@
               <div class="doc-info-right">
                 <div class="clini-infos">
                   <ul>
-                    <li><i class="far fa-thumbs-up"></i> 98%</li>
-                    <li><i class="far fa-comment"></i> 17 Feedback</li>
+                    <!-- <li><i class="far fa-thumbs-up"></i> 98%</li>
+                    <li><i class="far fa-comment"></i> 17 Feedback</li> -->
                     <li><i class="fas fa-map-marker-alt"></i> {{docteur.ville.nom}}, Mr</li>
                     <!-- c pour appelez le prix du docteur -->
-                    <li><i class="far fa-money-bill-alt"></i> {{docteur.prix_visite}} <i class="fas fa-info-circle"
+                    <li><i class="far fa-money-bill-alt"></i> {{docteur.prix_visite}} Dh <i class="fas fa-info-circle"
                         data-toggle="tooltip" title="Lorem Ipsum"></i> </li>
                   </ul>
                 </div>
                 <div class="clinic-booking">
-                  <a class="view-pro-btn" href="doctor-profile">View Profile</a>
-                  <a class="apt-btn" href="booking">Book Appointment</a>
+                  <a class="view-pro-btn" [routerLink]="['/docteur',docteur.docteur_id]"  > Voir le profil</a>
+                  <a class="apt-btn" href="#">Rendez-vous</a>
                 </div>
               </div>
             </div>

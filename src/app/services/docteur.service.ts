@@ -20,4 +20,8 @@ export class DocteurService {
   getByspecialiti(id){
     return this.http.post(`${environment.baseUrl}/specialites/docteurs`,{specialite_id:id} );
   }
+
+  getById(id){
+    return this.http.get(`${environment.baseUrl}/docteurs/${id}`);
+  }
 }

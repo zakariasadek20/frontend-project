@@ -40,7 +40,7 @@ export class SearchDoctorComponent implements OnInit {
 
   loadScripts() {
     const dynamicScripts = [
-      '../../assets/js/script.js'
+      '../../../assets/js/script.js'
     ];
     for (let i = 0; i < dynamicScripts.length; i++) {
       const node = document.createElement('script');
