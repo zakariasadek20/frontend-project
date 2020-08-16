@@ -93,11 +93,11 @@
 
       </div>
 
-      <div class="col-md-12 col-lg-8 col-xl-9">
+      <div class="col-md-12 col-lg-8 col-xl-9" #card>
 
         <!-- Doctor Widget -->
         <!-- le var li ghankhdmo bih  -->
-        <div *ngFor="let docteur of docteurs" class="card">
+        <div *ngFor="let docteur of docteurs| paginate: { itemsPerPage: 10, currentPage: page }" class="card" >
           <div class="card-body">
             <div class="doctor-widget">
               <div class="doc-info-left">
@@ -176,7 +176,8 @@
 
 
         <div class="load-more text-center">
-          <a class="btn btn-primary btn-sm" href="javascript:void(0);">Load More</a>
+          <!-- <a class="btn btn-primary btn-sm" href="javascript:void(0);">Load More</a> -->
+          <pagination-controls  (pageChange)="pageChanged($event,card)" autoHide="true"  responsive="true"></pagination-controls>
         </div>
       </div>
     </div>

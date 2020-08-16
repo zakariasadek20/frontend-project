@@ -36,13 +36,29 @@ export class SearchDoctorComponent implements OnInit {
   // ueryParam villeName if 'type' == 'ville'
   villeName: string;
 
+  page=1
 
+  loadScripts() {
+    const dynamicScripts = [
+      '../../assets/js/script.js'
+    ];
+    for (let i = 0; i < dynamicScripts.length; i++) {
+      const node = document.createElement('script');
+      node.src = dynamicScripts[i];
+      node.type = 'text/javascript';
+      node.async = false;
+      node.charset = 'utf-8';
+      document.getElementsByTagName('head')[0].appendChild(node);
+    }
+  }
 
   constructor(private route: ActivatedRoute,
               private docteurService: DocteurService,
               private specialieService: SpecialitieService) {
     this.latitude = localStorage.getItem('latitude');
     this.longitude = localStorage.getItem('longitude');
+    this.loadScripts();
+
   }
 
 
@@ -99,12 +115,14 @@ export class SearchDoctorComponent implements OnInit {
   getBySpecialitie(event, idSpecialite) {
     const isChecked: boolean = event.target.checked;
 
+    //verify if isChecked === true
     if (isChecked) {
       this.SelectedSpesialites = [...this.SelectedSpesialites, idSpecialite];
     } else {
       this.SelectedSpesialites = this.SelectedSpesialites.filter((id) => id !== idSpecialite);
     }
 
+    //check if length of SelectedSpesialites[] > 0 that means there are selected specialties
     if (this.SelectedSpesialites.length > 0) {
       this.docteurService.getByspecialiti(this.SelectedSpesialites).subscribe((docteurs) => {
         this.docteurs = docteurs['data'];
@@ -116,5 +134,10 @@ export class SearchDoctorComponent implements OnInit {
     }
 
   }
+  pageChanged(event,card:HTMLElement) {
+    // window.anchorScroll();
+    this.page = event;
+    card.scrollIntoView();
 
+  }
 }
