@@ -108,7 +108,7 @@
                 </div>
                 <div class="doc-info-cont">
                   <!-- c pour appelez le nom du docteur -->
-                  <h4 class="doc-name"><a href="doctor-profile">Dr. {{docteur.docteur_nom}}</a></h4>
+                  <h4 class="doc-name"><a href="doctor-profile">Dr. {{ docteur.docteur_nom }} {{ docteur.prenom }}</a></h4>
                   <p class="doc-speciality"><span *ngFor="let specialite of docteur.specialites">{{specialite.nom}}
                       .</span> </p>
                   <h5 class="doc-department"><img src="../../../assets/img/specialities/specialities-05.png"
@@ -166,7 +166,7 @@
                 </div>
                 <div class="clinic-booking">
                   <a class="view-pro-btn" [routerLink]="['/docteur',docteur.docteur_id]"  > Voir le profil</a>
-                  <a class="apt-btn" href="#">Rendez-vous</a>
+                  <a class="apt-btn" [routerLink]="['/docteur',docteur.docteur_id,'booking']"  >Rendez-vous</a>
                 </div>
               </div>
             </div>

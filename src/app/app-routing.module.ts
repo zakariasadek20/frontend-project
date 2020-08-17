@@ -1,3 +1,4 @@
+import { BookingDoctorComponent } from './components/booking-doctor/booking-doctor.component';
 import { ProfileDoctorComponent } from './components/profile-doctor/profile-doctor.component';
 import { SearchDoctorComponent } from './components/search-doctor/search-doctor.component';
 import { NgModule } from '@angular/core';
@@ -10,7 +11,8 @@ const routes: Routes = [
   {
     path: "docteur", children: [
       { path: "search", component: SearchDoctorComponent },
-      { path: ":id", component:ProfileDoctorComponent}
+      { path: ":id/booking", component:BookingDoctorComponent},
+      { path: ":id", component:ProfileDoctorComponent},
 
     ]
   }

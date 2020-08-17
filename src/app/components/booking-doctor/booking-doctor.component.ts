@@ -1,13 +1,13 @@
-import { ActivatedRoute } from '@angular/router';
 import { DocteurService } from './../../services/docteur.service';
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-profile-doctor',
-  templateUrl: './profile-doctor.component.html',
-  styleUrls: ['./profile-doctor.component.css']
+  selector: 'app-booking-doctor',
+  templateUrl: './booking-doctor.component.html',
+  styleUrls: ['./booking-doctor.component.css']
 })
-export class ProfileDoctorComponent implements OnInit {
+export class BookingDoctorComponent implements OnInit {
 
   docteur: any={
     'docteur_id':0,
@@ -28,23 +28,20 @@ export class ProfileDoctorComponent implements OnInit {
 
   };
 
-  id;
+  constructor(private router:ActivatedRoute,private docteurService:DocteurService) {
 
-  constructor(private docteurService:DocteurService,private route:ActivatedRoute) {
-    this.id=this.route.snapshot.paramMap.get('id');
-
-    this.getById();
-
+    let id = this.router.snapshot.paramMap.get('id');
+    this.getDocteurById(id);
    }
 
   ngOnInit(): void {
   }
 
-  getById(){
-    this.docteurService.getById(this.id).subscribe((docteur)=>{
+
+  getDocteurById(id){
+    this.docteurService.getById(id).subscribe((docteur)=>{
       this.docteur=docteur['data'];
 
     });
   }
-
 }

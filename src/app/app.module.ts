@@ -20,6 +20,7 @@ import { SearchDoctorComponent } from './components/search-doctor/search-doctor.
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { ProfileDoctorComponent } from './components/profile-doctor/profile-doctor.component';
+import { BookingDoctorComponent } from './components/booking-doctor/booking-doctor.component';
 Sentry.init({
   dsn: "https://f9c730986abe4b5db39f20d6ce29e3a1@o381431.ingest.sentry.io/5378176",
   // TryCatch has to be configured to disable XMLHttpRequest wrapping, as we are going to handle
@@ -101,6 +102,7 @@ export class SentryErrorHandler implements ErrorHandler {
     HomeBlogSectionComponent,
     SearchDoctorComponent,
     ProfileDoctorComponent,
+    BookingDoctorComponent,
   ],
   imports: [
     BrowserModule,

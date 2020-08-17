@@ -12,5 +12,5 @@ export class SpecialitieService {
   getall(){
     return this.http.get(`${environment.baseUrl}/specialites`);
   }
-  
+
 }
