@@ -18,9 +18,11 @@ import { HomeAvailableFeaturesComponent } from './components/home-available-feat
 import { HomeBlogSectionComponent } from './components/home-blog-section/home-blog-section.component';
 import { SearchDoctorComponent } from './components/search-doctor/search-doctor.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { ProfileDoctorComponent } from './components/profile-doctor/profile-doctor.component';
 import { BookingDoctorComponent } from './components/booking-doctor/booking-doctor.component';
+import { AgmCoreModule } from '@agm/core';
+
 Sentry.init({
   dsn: "https://f9c730986abe4b5db39f20d6ce29e3a1@o381431.ingest.sentry.io/5378176",
   // TryCatch has to be configured to disable XMLHttpRequest wrapping, as we are going to handle
@@ -33,7 +35,7 @@ Sentry.init({
 
 @Injectable()
 export class SentryErrorHandler implements ErrorHandler {
-  constructor() {}
+  constructor() { }
 
   extractError(error) {
     // Try to unwrap zone.js error.
@@ -110,7 +112,10 @@ export class SentryErrorHandler implements ErrorHandler {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDZQV0uGGIaHm8G2XjdW_kI5ST4mzFJ1qs'
+    })
   ],
   providers: [{ provide: ErrorHandler, useClass: SentryErrorHandler }],
   bootstrap: [AppComponent]

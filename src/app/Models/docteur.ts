@@ -24,6 +24,14 @@ export interface Docteur {
       docteurs_count: 0;
     }
   ];
+  jourDeTravail?: [
+    {
+      jour_index: 0,
+      heure_deb: '',
+      docteurs_count: 0
+    }
+  ];
+
   services?: [
     {
       service_id: 0;

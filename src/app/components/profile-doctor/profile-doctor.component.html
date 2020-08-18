@@ -229,13 +229,15 @@
           <!-- /Overview Content -->
 
           <!-- Locations Content -->
-          <!-- <div role="tabpanel" id="doc_locations" class="tab-pane fade"> -->
+          <div role="tabpanel" id="doc_locations" class="tab-pane fade">
 
             <!-- Location List -->
             <!-- ng for star from hear <div class="location-list">-->
-            <!-- <div class="location-list">
-              <div class="row"> -->
-
+              <div class="location-list">
+                <agm-map [latitude]="docteur.position.latitude" [zoom]="15" [longitude]="docteur.position.longitude">
+                  <agm-marker [latitude]="docteur.position.latitude" [longitude]="docteur.position.longitude"></agm-marker>
+                </agm-map>
+                <div class="row">
                 <!-- Clinic Content -->
                 <!-- <div class="col-md-6">
                   <div class="clinic-content">
@@ -306,13 +308,13 @@
                   <div class="consult-price">
                     $250
                   </div>
-                </div>
+                </div>-->
               </div>
-            </div> -->
+            </div>
             <!-- /Location List -->
 
 
-          <!-- </div> -->
+          </div>
           <!-- /Locations Content -->
 
 
