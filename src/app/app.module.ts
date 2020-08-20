@@ -22,6 +22,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ProfileDoctorComponent } from './components/profile-doctor/profile-doctor.component';
 import { BookingDoctorComponent } from './components/booking-doctor/booking-doctor.component';
 import { AgmCoreModule } from '@agm/core';
+import { DatePipe } from '@angular/common';
 
 Sentry.init({
   dsn: "https://f9c730986abe4b5db39f20d6ce29e3a1@o381431.ingest.sentry.io/5378176",
@@ -117,7 +118,7 @@ export class SentryErrorHandler implements ErrorHandler {
       apiKey: 'AIzaSyDZQV0uGGIaHm8G2XjdW_kI5ST4mzFJ1qs'
     })
   ],
-  providers: [{ provide: ErrorHandler, useClass: SentryErrorHandler }],
+  providers: [{ provide: ErrorHandler, useClass: SentryErrorHandler }, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

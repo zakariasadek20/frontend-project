@@ -35,7 +35,7 @@ export class ProfileDoctorComponent implements OnInit {
 
     this.getById();
 
-   }
+  }
 
   ngOnInit(): void {
   }
