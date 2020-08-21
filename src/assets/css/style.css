@@ -3548,7 +3548,8 @@ html.menu-opened body {
     margin-bottom: 10px;
     padding: 5px 5px;
     text-align: center;
-	position: relative;
+  position: relative;
+  cursor: pointer;
 }
 .time-slot li .timing:hover {
     background-color: #fff;

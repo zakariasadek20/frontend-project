@@ -29,9 +29,11 @@ export class BookingDoctorComponent implements OnInit {
     'awards': [{ 'award': '', 'annee': 0 }]
 
   };
-  heureTravail:any=[];
 
-  constructor(private router: ActivatedRoute, private docteurService: DocteurService ,private datePipe: DatePipe) {
+  // store list of days and hours work 
+  joursTravail = [];
+
+  constructor(private router: ActivatedRoute, private docteurService: DocteurService, private datePipe: DatePipe) {
 
     let id = this.router.snapshot.paramMap.get('id');
     this.getDocteurById(id);
@@ -45,15 +47,8 @@ export class BookingDoctorComponent implements OnInit {
   getDocteurById(id) {
     this.docteurService.getById(id).subscribe((docteur) => {
       this.docteur = docteur['data'];
-      console.log(this.docteur);
-     // this.handelHours(this.docteur.jourDeTravail[0].heure_deb,this.docteur.jourDeTravail[0].heurs_fin);
-      console.log(this.docteur.jourDeTravail[0].heure_deb);
-      console.log(this.docteur.jourDeTravail[0].heurs_fin);
-      let date:Date=new Date(this.datePipe.transform(this.docteur.jourDeTravail[0].heure_deb,'h:mm:ss'));
-      console.log(date);
-
-      // console.log(this.heureTravail);
-
+      this.handelHours();
+      this.handelDays();
     });
   }
 
@@ -83,27 +78,93 @@ export class BookingDoctorComponent implements OnInit {
     }
   }
 
-  handleDate(jourIndex){
-    let currentDate:Date=new Date();
+  handleDate(jourIndex) {
 
-    let currentDayIndex=currentDate.getDay();
-    if (jourIndex<=currentDayIndex) {
-      let diffDays=currentDayIndex-jourIndex;
-      currentDate.setDate(currentDate.getDate()-diffDays);
+    let currentDate: Date = new Date();
+
+    // Get index day of the week.
+    let currentDayIndex = currentDate.getDay();
+
+    if (jourIndex <= currentDayIndex) {
+      // get difference of days between current day and selected day 
+      let diffDays = currentDayIndex - jourIndex;
+      currentDate.setDate(currentDate.getDate() - diffDays);
       return currentDate;
-    }else{
-      let diffDays=jourIndex-currentDayIndex;
-      currentDate.setDate(currentDate.getDate()+diffDays);
+    } else {
+      let diffDays = jourIndex - currentDayIndex;
+      currentDate.setDate(currentDate.getDate() + diffDays);
       return currentDate;
     }
   }
 
-  handelHours(heureDeb:Date,heurfin:Date){
+  handelHours() {
 
-    let currentH:Date=heureDeb;
-    while (currentH<=heurfin) {
-      this.heureTravail=[...this.heureTravail,this.datePipe.transform(currentH.getTime(),'h:mm')];
-      currentH.setMinutes(currentH.getMinutes()+30);
+    // get list of days  work 
+    let jourTravail = this.docteur.jourDeTravail;
+
+    jourTravail.forEach(jour => {
+      // =>boucle
+      let currentDateString = this.datePipe.transform(this.handleDate(jour.jour_index), 'MMMM d y');
+      let heureDeb: Date = new Date(currentDateString + " " + jour.heure_deb);
+      let heurfin: Date = new Date(currentDateString + " " + jour.heurs_fin);
+      // store heureDeb in a varialble currenth 
+      let currentH: Date = heureDeb;
+      // hours of word for the day we are =>boucle
+      let heures = [];
+      while (currentH <= heurfin) {
+        // check if this hour is valid (not expired)
+        let expired = heureDeb.getTime() < new Date().getTime() ? true : false;
+
+        heures.push({ 'heure': this.datePipe.transform(currentH.getTime(), 'H:mm'), 'selected': false, 'expired': expired });
+        currentH.setMinutes(currentH.getMinutes() + 30);
+
+      }
+      this.joursTravail.push(heures);
+    });
+  }
+
+  selectHoure(hour) {
+    this.joursTravail.forEach(jour => {
+      jour.forEach(hr => {
+        if (hr === hour) {
+          hour.selected = !hour.selected
+        }
+        else {
+          hr.selected = false;
+        }
+      });
+    });
+  }
+
+  handelDays() {
+    let days = [];
+    days = this.docteur.jourDeTravail;
+
+    let currentDayIndex = new Date().getDay();
+    // days.forEach(day => {
+    //   if (day.jour_index < currentDayIndex) {
+    //     days.splice(days.indexOf(day),1);
+    //     days.push(day);
+    //   }else{
+    //     return false;
+    //   }
+      
+    // });
+    for (let index = 0; index < days.length; index++) {
+      if (days[index].jour_index < currentDayIndex) {
+        console.log(days[index].jour_index);
+        let day=days[index];
+        days.shift();
+        // days.push(day);
+      }else{
+       return ;
+      }
+      
     }
+
+
+    console.log(days);
+    console.log(currentDayIndex);
+
   }
 }

@@ -72,7 +72,7 @@
                         <i class="fa fa-chevron-left"></i>
                       </a>
                     </li>
-                    <li *ngFor="let day of  docteur.jourDeTravail">
+                    <li *ngFor="let day of  docteur.jourDeTravail" >
                       <span> {{handleDay(day.jour_index)}} </span>
                       <span class="slot-date">{{handleDate(day.jour_index) | date : 'd MMM yyyy'}}</span>
                     </li>
@@ -99,10 +99,10 @@
                 <!-- Time Slot -->
                 <div class="time-slot">
                   <ul class="clearfix">
-                    <li *ngFor="let hour of docteur.jourDeTravail">
-                      <a class="timing" href="#">
-                        <span>9:00</span> <span>AM</span>
-                      </a>
+                    <li *ngFor="let day of joursTravail">
+                      <a *ngFor="let hour of day" class="timing" [ngClass]="{'selected': hour.selected,'disabled':hour.expired}"  (click)="selectHoure(hour)">
+                        {{hour.heure}}               
+                    </a>
                     </li>
                   </ul>
                 </div>

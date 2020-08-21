@@ -1,0 +1,7 @@
+a.disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  background-color: red;
+	border: 1px solid red;
+	color: #fff;
+}
