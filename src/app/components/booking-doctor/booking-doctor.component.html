@@ -4,8 +4,10 @@
       <div class="col-md-12 col-12">
         <nav aria-label="breadcrumb" class="page-breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index">Accueil</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Réservation</li>
+            <li class="breadcrumb-item"><a [routerLink]="['/']">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">
+              Réservation
+            </li>
           </ol>
         </nav>
         <h2 class="breadcrumb-title">Réservation</h2>
@@ -18,18 +20,23 @@
 <!-- Page Content -->
 <div class="content">
   <div class="container">
-
     <div class="row">
       <div class="col-12">
-
         <div class="card">
           <div class="card-body">
             <div class="booking-doc-info">
               <a href="doctor-profile" class="booking-doc-img">
-                <img src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
+                <img
+                  src="assets/img/doctors/doctor-thumb-02.jpg"
+                  alt="User Image"
+                />
               </a>
               <div class="booking-info">
-                <h4><a href="doctor-profile">Dr. {{ docteur.docteur_nom }} {{ docteur.prenom }}</a></h4>
+                <h4>
+                  <a href="doctor-profile"
+                    >Dr. {{ docteur.docteur_nom }} {{ docteur.prenom }}</a
+                  >
+                </h4>
                 <div class="rating">
                   <i class="fas fa-star filled"></i>
                   <i class="fas fa-star filled"></i>
@@ -38,7 +45,10 @@
                   <i class="fas fa-star"></i>
                   <span class="d-inline-block average-rating">35</span>
                 </div>
-                <p class="text-muted mb-0"><i class="fas fa-map-marker-alt"></i> {{ docteur.ville.nom }}, USA</p>
+                <p class="text-muted mb-0">
+                  <i class="fas fa-map-marker-alt"></i> {{ docteur.ville.nom }},
+                  USA
+                </p>
               </div>
             </div>
           </div>
@@ -48,22 +58,20 @@
             <h4 class="mb-1">11 November 2019</h4>
             <p class="text-muted">Monday</p>
           </div>
-          <div class="col-12 col-sm-8 col-md-6 text-sm-right">
+          <!-- <div class="col-12 col-sm-8 col-md-6 text-sm-right">
             <div class="bookingrange btn btn-white btn-sm mb-3">
               <i class="far fa-calendar-alt mr-2"></i>
               <span></span>
               <i class="fas fa-chevron-down ml-2"></i>
             </div>
-          </div>
+          </div> -->
         </div>
         <!-- Schedule Widget -->
         <div class="card booking-schedule schedule-widget">
-
           <!-- Schedule Header -->
           <div class="schedule-header">
             <div class="row">
               <div class="col-md-12">
-
                 <!-- Day Slot -->
                 <div class="day-slot">
                   <ul>
@@ -72,9 +80,11 @@
                         <i class="fa fa-chevron-left"></i>
                       </a>
                     </li>
-                    <li *ngFor="let day of  docteur.jourDeTravail" >
-                      <span> {{handleDay(day.jour_index)}} </span>
-                      <span class="slot-date">{{handleDate(day.jour_index) | date : 'd MMM yyyy'}}</span>
+                    <li *ngFor="let day of docteur.jourDeTravail">
+                      <span> {{ handleDay(day.jour_index) }} </span>
+                      <span class="slot-date">{{
+                        handleDate(day.jour_index) | date: "d MMM yyyy"
+                      }}</span>
                     </li>
 
                     <li class="right-arrow">
@@ -85,7 +95,6 @@
                   </ul>
                 </div>
                 <!-- /Day Slot -->
-
               </div>
             </div>
           </div>
@@ -95,37 +104,48 @@
           <div class="schedule-cont">
             <div class="row">
               <div class="col-md-12">
-
                 <!-- Time Slot -->
                 <div class="time-slot">
                   <ul class="clearfix">
                     <li *ngFor="let day of joursTravail">
-                      <a *ngFor="let hour of day" class="timing" [ngClass]="{'selected': hour.selected,'disabled':hour.expired}"  (click)="selectHoure(hour)">
-                        {{hour.heure}}               
-                    </a>
+                      <a
+                        *ngFor="let hour of day.hours"
+                        class="timing"
+                        [ngClass]="{
+                          selected: hour.selected,
+                          disabled: hour.expired
+                        }"
+                        (click)="selectHoure(hour)"
+                      >
+                        {{ hour.heure }}
+                      </a>
                     </li>
                   </ul>
                 </div>
                 <!-- /Time Slot -->
-
               </div>
             </div>
           </div>
           <!-- /Schedule Content -->
-
         </div>
         <!-- /Schedule Widget -->
 
         <!-- Submit Section -->
         <div class="submit-section proceed-btn text-right">
-          <a href="checkout" class="btn btn-primary submit-btn">Proceed to Pay</a>
+          <a
+            [routerLink]="['/docteur', docteur.docteur_id, 'checkout']"
+            [queryParams]="{
+              date: selectedTimeBooking.jour,
+              heure: selectedTimeBooking.heure
+            }"
+            class="btn btn-primary submit-btn"
+            >Continue</a
+          >
         </div>
         <!-- /Submit Section -->
-
       </div>
     </div>
   </div>
-
 </div>
 <!-- /Page Content -->
 <!-- </div> -->
