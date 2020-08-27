@@ -3606,7 +3606,7 @@ html.menu-opened body {
 }
 .card-label > input {
     background-color: #fff;
-    border: 1px solid #dbdbdb;
+    border: 1px solid #959595;
     border-radius: 4px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .05);
     display: block;
@@ -3616,6 +3616,17 @@ html.menu-opened body {
     transition: border-color .3s;
     width: 100%;
 }
+.card-label-error > label {
+  color: red;
+}
+.card-label-error > input {
+  color: red;
+  border: 1px solid red;
+}
+/* .card-label-error > input:focus {
+  color: red;
+  border: 1px solid red;
+} */
 .exist-customer a {
 	color: #20c0f3;
 	font-weight: 500;

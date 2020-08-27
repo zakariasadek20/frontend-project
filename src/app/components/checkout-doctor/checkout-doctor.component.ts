@@ -1,6 +1,7 @@
 import { DocteurService } from './../../services/docteur.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-checkout-doctor',
@@ -8,6 +9,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./checkout-doctor.component.css'],
 })
 export class CheckoutDoctorComponent implements OnInit {
+
+  chekoutForm = new FormGroup({
+    nom: new FormControl('', [Validators.required,Validators.minLength(4)]),
+    prenom: new FormControl('', [Validators.required,Validators.minLength(4)]),
+    email: new FormControl('',[Validators.required,Validators.email]),
+    telephone: new FormControl('',[Validators.required])
+  });
+
   docteur: any = {
     docteur_id: 0,
     docteur_nom: '',
@@ -27,26 +36,29 @@ export class CheckoutDoctorComponent implements OnInit {
     awards: [{ award: '', annee: 0 }],
   };
 
-  selectedTimeBooking:Date;
+  selectedTimeBooking: Date;
 
   constructor(
+    private router: Router,
     private activatedRoute: ActivatedRoute,
-    private docteurService: DocteurService
-  ) {
-    let id=this.activatedRoute.snapshot.paramMap.get('id');
+    private docteurService: DocteurService,
 
-    this.selectedTimeBooking=new Date(this.activatedRoute.snapshot.queryParamMap.get('booking'));
+  ) {
+    let id = this.activatedRoute.snapshot.paramMap.get('id');
+
+    this.selectedTimeBooking = new Date(this.activatedRoute.snapshot.queryParamMap.get('booking'));
 
     console.log(this.selectedTimeBooking);
 
     this.getById(id);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   getById(id) {
     this.docteurService.getById(id).subscribe((docteur) => {
       this.docteur = docteur['data'];
     });
   }
+  checkbtn(){}
 }

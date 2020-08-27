@@ -1,4 +1,3 @@
-
 <div class="breadcrumb-bar">
 				<div class="container-fluid">
 					<div class="row align-items-center">
@@ -26,34 +25,55 @@
 								<div class="card-body">
 
 									<!-- Checkout Form -->
-									<form action="booking-success">
-
+									<form [formGroup]="chekoutForm" (ngSubmit)="checkbtn()">
 										<!-- Personal Information -->
 										<div class="info-widget">
 											<h4 class="card-title">Informations Personnels</h4>
 											<div class="row">
 												<div class="col-md-6 col-sm-12">
-													<div class="form-group card-label">
+                          <div class="form-group card-label"
+                               [ngClass]="{
+                                            'card-label-error': (chekoutForm.get('prenom').touched || chekoutForm.get('prenom').dirty ) &&
+                                                                (chekoutForm.get('prenom').getError('required') || chekoutForm.get('prenom').getError('minlength'))
+                                          }">
 														<label>Prénom</label>
-														<input class="form-control" type="text">
+                            <input formControlName="prenom" class="form-control" type="text">
 													</div>
 												</div>
 												<div class="col-md-6 col-sm-12">
-													<div class="form-group card-label">
+                          <div class="form-group card-label"
+                               [ngClass]="{
+                                            'card-label-error': (chekoutForm.get('nom').touched || chekoutForm.get('nom').dirty ) &&
+                                                                (chekoutForm.get('nom').getError('required') || chekoutForm.get('nom').getError('minlength'))
+                                          }">
 														<label>Nom</label>
-														<input class="form-control" type="text">
+                            <input
+                            formControlName="nom"
+                            class="form-control" type="text">
 													</div>
 												</div>
 												<div class="col-md-6 col-sm-12">
-													<div class="form-group card-label">
+                          <div class="form-group card-label"
+                              [ngClass]="{
+                                            'card-label-error': (chekoutForm.get('email').touched || chekoutForm.get('email').dirty ) &&
+                                                                (chekoutForm.get('email').getError('required') || chekoutForm.get('email').getError('email'))
+                                          }">
 														<label>Email</label>
-														<input class="form-control" type="email">
+                            <input
+                            formControlName="email"
+                            class="form-control" type="email">
 													</div>
 												</div>
 												<div class="col-md-6 col-sm-12">
-													<div class="form-group card-label">
+													<div class="form-group card-label"
+                               [ngClass]="{
+                                             'card-label-error': (chekoutForm.get('telephone').touched || chekoutForm.get('telephone').dirty ) &&
+                                                                 (chekoutForm.get('telephone').getError('required'))
+                                          }">
 														<label>Téléphone</label>
-														<input class="form-control" type="text">
+                            <input
+                            formControlName="telephone"
+                            class="form-control" type="text">
 													</div>
 												</div>
 											</div>
