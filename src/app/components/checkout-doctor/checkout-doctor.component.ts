@@ -27,18 +27,18 @@ export class CheckoutDoctorComponent implements OnInit {
     awards: [{ award: '', annee: 0 }],
   };
 
-  selectedTimeBooking:any={
-    jour:'',
-    heure:'',
-  }
+  selectedTimeBooking:Date;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private docteurService: DocteurService
   ) {
     let id=this.activatedRoute.snapshot.paramMap.get('id');
-    this.selectedTimeBooking.jour=this.activatedRoute.snapshot.queryParamMap.get('date');
-    this.selectedTimeBooking.heure=this.activatedRoute.snapshot.queryParamMap.get('heure');
+
+    this.selectedTimeBooking=new Date(this.activatedRoute.snapshot.queryParamMap.get('booking'));
+
+    console.log(this.selectedTimeBooking);
+
     this.getById(id);
   }
 

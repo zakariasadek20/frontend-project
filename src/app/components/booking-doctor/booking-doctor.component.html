@@ -132,15 +132,16 @@
 
         <!-- Submit Section -->
         <div class="submit-section proceed-btn text-right">
-          <a
+          <button
             [routerLink]="['/docteur', docteur.docteur_id, 'checkout']"
             [queryParams]="{
-              date: selectedTimeBooking.jour,
-              heure: selectedTimeBooking.heure
+              booking: selectedTimeBooking
             }"
+            [disabled]="!selectedTimeBooking"
             class="btn btn-primary submit-btn"
-            >Continue</a
           >
+            Continue
+          </button>
         </div>
         <!-- /Submit Section -->
       </div>

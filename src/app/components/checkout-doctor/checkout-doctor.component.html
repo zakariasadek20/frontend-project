@@ -67,7 +67,7 @@
 											<!-- Paypal Payment -->
 											<div class="payment-list">
 												<label class="payment-radio paypal-option">
-													<input type="radio" name="radio">
+													<input type="radio" name="radio" checked>
 													<span class="checkmark"></span>
 													Espèces
 												</label>
@@ -77,7 +77,7 @@
 											<!-- Credit Card Payment -->
 											<div class="payment-list">
 												<label class="payment-radio credit-card-option">
-													<input type="radio" name="radio" checked>
+													<input type="radio" name="radio" >
 													<span class="checkmark"></span>
 													Carte de crédit
 												</label>
@@ -186,8 +186,8 @@
 									<div class="booking-summary">
 										<div class="booking-item-wrap">
 											<ul class="booking-date">
-												<li>Date <span>{{ selectedTimeBooking.jour }}</span></li>
-												<li>Á l'heure <span>{{ selectedTimeBooking.heure }}</span></li>
+												<li>Date <span>{{ selectedTimeBooking |date : 'd MMM y' }}</span></li>
+												<li>Á l'heure <span>{{ selectedTimeBooking |date : 'H:mm'}}</span></li>
 											</ul>
 											<ul class="booking-fee">
 												<li>Frais de consultation <span>{{ docteur.prix_visite }} DH</span></li>

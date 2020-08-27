@@ -126,34 +126,38 @@ export class BookingDoctorComponent implements OnInit {
         currentH.setMinutes(currentH.getMinutes() + 30);
       }
       this.joursTravail.push({
-        'date':this.datePipe.transform(this.handleDate(jour.jour_index),'d MMM y'),
-        'hours':heures
+        date: this.datePipe.transform(
+          this.handleDate(jour.jour_index),
+          'd MMM y'
+        ),
+        hours: heures,
       });
     });
   }
 
-  selectedTimeBooking:any={
-    jour:'',
-    heure:'',
-  }
+  selectedTimeBooking: Date;
+
   selectHoure(hour) {
     this.joursTravail.forEach((jour) => {
       jour.hours.forEach((hr) => {
         if (hr === hour) {
           hour.selected = !hour.selected;
-          if(hour.selected){
-            this.selectedTimeBooking.jour=jour.date
-            this.selectedTimeBooking.heure=hour.heure
+          if (hour.selected) {
+            // this.selectedTimeBooking.jour = jour.date;
+            // this.selectedTimeBooking.heure = hour.heure;
+
+            this.selectedTimeBooking = new Date(jour.date + ' ' + hour.heure);
+          } else {
+            this.selectedTimeBooking = null;
           }
         } else {
           hr.selected = false;
         }
       });
     });
+
     console.log(this.selectedTimeBooking);
-
   }
-
 
   //not Completed
   handelDays(jourDeTravail) {
@@ -172,15 +176,15 @@ export class BookingDoctorComponent implements OnInit {
     // restartLoop:
 
     for (let _i = 0; _i < days.length; _i++) {
-      if (days[_i].jour_index  as number < currentDayIndex)  {
-        const index=_i;
+      if ((days[_i].jour_index as number) < currentDayIndex) {
+        const index = _i;
         // console.log(days[index]);
         // console.log(days[_i]);
         // console.log(days.indexOf(days[_i]));
         days.splice(index, index);
         // days.push(day);
         // newdays=[...newdays,days.splice(index,1)];
-        _i=0;
+        _i = 0;
         continue;
         // continue;
         // lenght=days.length
