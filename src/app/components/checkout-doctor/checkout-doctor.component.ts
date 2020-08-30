@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { DocteurService } from './../../services/docteur.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -9,12 +10,15 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./checkout-doctor.component.css'],
 })
 export class CheckoutDoctorComponent implements OnInit {
-
   chekoutForm = new FormGroup({
-    nom: new FormControl('', [Validators.required,Validators.minLength(4)]),
-    prenom: new FormControl('', [Validators.required,Validators.minLength(4)]),
-    email: new FormControl('',[Validators.required,Validators.email]),
-    telephone: new FormControl('',[Validators.required])
+    nom: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    prenom: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    telephone: new FormControl('', [
+      Validators.required,
+      Validators.pattern('[0-9]{10}'),
+    ]),
+    accept: new FormControl('', [Validators.requiredTrue]),
   });
 
   docteur: any = {
@@ -37,28 +41,47 @@ export class CheckoutDoctorComponent implements OnInit {
   };
 
   selectedTimeBooking: Date;
+  bookedSuccessfully: boolean = false;
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private docteurService: DocteurService,
-
+    private datePipe: DatePipe
   ) {
     let id = this.activatedRoute.snapshot.paramMap.get('id');
 
-    this.selectedTimeBooking = new Date(this.activatedRoute.snapshot.queryParamMap.get('booking'));
+    this.selectedTimeBooking = new Date(
+      this.activatedRoute.snapshot.queryParamMap.get('booking')
+    );
 
     console.log(this.selectedTimeBooking);
 
     this.getById(id);
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   getById(id) {
     this.docteurService.getById(id).subscribe((docteur) => {
       this.docteur = docteur['data'];
     });
   }
-  checkbtn(){}
+  checkbtn() {
+    let data = {
+      nom: this.chekoutForm.value.nom,
+      prenom: this.chekoutForm.value.prenom,
+      email: this.chekoutForm.value.email,
+      telephone: this.chekoutForm.value.telephone,
+      datetime: this.datePipe.transform(
+        this.selectedTimeBooking,
+        'y-MM-d H:mm'
+      ),
+      docteur_id: this.docteur.docteur_id,
+    };
+
+    this.docteurService.bookingDocteurGestPatient(data).subscribe((rdv) => {
+      this.bookedSuccessfully = true;
+    });
+  }
 }

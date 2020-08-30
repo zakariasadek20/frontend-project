@@ -1,237 +1,337 @@
 <div class="breadcrumb-bar">
-				<div class="container-fluid">
-					<div class="row align-items-center">
-						<div class="col-md-12 col-12">
-							<nav aria-label="breadcrumb" class="page-breadcrumb">
-								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a [routerLink]="['/']">Acceuil</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Check-out</li>
-								</ol>
-							</nav>
-							<h2 class="breadcrumb-title">Check-out</h2>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- /Breadcrumb -->
+  <div class="container-fluid">
+    <div class="row align-items-center">
+      <div class="col-md-12 col-12">
+        <nav aria-label="breadcrumb" class="page-breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="['/']">Acceuil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">
+              Check-out
+            </li>
+          </ol>
+        </nav>
+        <h2 class="breadcrumb-title">Check-out</h2>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Breadcrumb -->
 
-			<!-- Page Content -->
-			<div class="content">
-				<div class="container">
+<!-- Page Content -->
+<div class="content" *ngIf="!bookedSuccessfully">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7 col-lg-8">
+        <div class="card">
+          <div class="card-body">
+            <!-- Checkout Form -->
+            <form [formGroup]="chekoutForm" (ngSubmit)="checkbtn()">
+              <!-- Personal Information -->
+              <div class="info-widget">
+                <h4 class="card-title">Informations Personnels</h4>
+                <div class="row">
+                  <div class="col-md-6 col-sm-12">
+                    <div
+                      class="form-group card-label"
+                      [ngClass]="{
+                        'card-label-error':
+                          (chekoutForm.get('prenom').touched ||
+                            chekoutForm.get('prenom').dirty) &&
+                          (chekoutForm.get('prenom').getError('required') ||
+                            chekoutForm.get('prenom').getError('minlength'))
+                      }"
+                    >
+                      <label>Prénom</label>
+                      <input
+                        formControlName="prenom"
+                        class="form-control"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    <div
+                      class="form-group card-label"
+                      [ngClass]="{
+                        'card-label-error':
+                          (chekoutForm.get('nom').touched ||
+                            chekoutForm.get('nom').dirty) &&
+                          (chekoutForm.get('nom').getError('required') ||
+                            chekoutForm.get('nom').getError('minlength'))
+                      }"
+                    >
+                      <label>Nom</label>
+                      <input
+                        formControlName="nom"
+                        class="form-control"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    <div
+                      class="form-group card-label"
+                      [ngClass]="{
+                        'card-label-error':
+                          (chekoutForm.get('email').touched ||
+                            chekoutForm.get('email').dirty) &&
+                          (chekoutForm.get('email').getError('required') ||
+                            chekoutForm.get('email').getError('email'))
+                      }"
+                    >
+                      <label>Email</label>
+                      <input
+                        formControlName="email"
+                        class="form-control"
+                        type="email"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    <div
+                      class="form-group card-label"
+                      [ngClass]="{
+                        'card-label-error':
+                          (chekoutForm.get('telephone').touched ||
+                            chekoutForm.get('telephone').dirty) &&
+                          (chekoutForm.get('telephone').getError('required') ||
+                            chekoutForm.get('telephone').getError('pattern'))
+                      }"
+                    >
+                      <label>Téléphone</label>
+                      <input
+                        formControlName="telephone"
+                        class="form-control"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="exist-customer">
+                  Existing Customer? <a href="#">Connectez-vous</a>
+                </div>
+              </div>
+              <!-- /Personal Information -->
 
-					<div class="row">
-						<div class="col-md-7 col-lg-8">
-							<div class="card">
-								<div class="card-body">
+              <div class="payment-widget">
+                <h4 class="card-title">Paiement</h4>
 
-									<!-- Checkout Form -->
-									<form [formGroup]="chekoutForm" (ngSubmit)="checkbtn()">
-										<!-- Personal Information -->
-										<div class="info-widget">
-											<h4 class="card-title">Informations Personnels</h4>
-											<div class="row">
-												<div class="col-md-6 col-sm-12">
-                          <div class="form-group card-label"
-                               [ngClass]="{
-                                            'card-label-error': (chekoutForm.get('prenom').touched || chekoutForm.get('prenom').dirty ) &&
-                                                                (chekoutForm.get('prenom').getError('required') || chekoutForm.get('prenom').getError('minlength'))
-                                          }">
-														<label>Prénom</label>
-                            <input formControlName="prenom" class="form-control" type="text">
-													</div>
-												</div>
-												<div class="col-md-6 col-sm-12">
-                          <div class="form-group card-label"
-                               [ngClass]="{
-                                            'card-label-error': (chekoutForm.get('nom').touched || chekoutForm.get('nom').dirty ) &&
-                                                                (chekoutForm.get('nom').getError('required') || chekoutForm.get('nom').getError('minlength'))
-                                          }">
-														<label>Nom</label>
-                            <input
-                            formControlName="nom"
-                            class="form-control" type="text">
-													</div>
-												</div>
-												<div class="col-md-6 col-sm-12">
-                          <div class="form-group card-label"
-                              [ngClass]="{
-                                            'card-label-error': (chekoutForm.get('email').touched || chekoutForm.get('email').dirty ) &&
-                                                                (chekoutForm.get('email').getError('required') || chekoutForm.get('email').getError('email'))
-                                          }">
-														<label>Email</label>
-                            <input
-                            formControlName="email"
-                            class="form-control" type="email">
-													</div>
-												</div>
-												<div class="col-md-6 col-sm-12">
-													<div class="form-group card-label"
-                               [ngClass]="{
-                                             'card-label-error': (chekoutForm.get('telephone').touched || chekoutForm.get('telephone').dirty ) &&
-                                                                 (chekoutForm.get('telephone').getError('required'))
-                                          }">
-														<label>Téléphone</label>
-                            <input
-                            formControlName="telephone"
-                            class="form-control" type="text">
-													</div>
-												</div>
-											</div>
-											<div class="exist-customer">Existing Customer? <a href="#">Connectez-vous</a></div>
-										</div>
-										<!-- /Personal Information -->
+                <!-- Paypal Payment -->
+                <div class="payment-list">
+                  <label class="payment-radio paypal-option">
+                    <input type="radio" name="radio" checked />
+                    <span class="checkmark"></span>
+                    Espèces
+                  </label>
+                </div>
+                <!-- /Paypal Payment -->
 
-										<div class="payment-widget">
-											<h4 class="card-title">Paiement</h4>
+                <!-- Credit Card Payment -->
+                <div class="payment-list">
+                  <label class="payment-radio credit-card-option">
+                    <input type="radio" name="radio" />
+                    <span class="checkmark"></span>
+                    Carte de crédit
+                  </label>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group card-label">
+                        <label for="card_name">Nom sur la carte</label>
+                        <input
+                          class="form-control"
+                          id="card_name"
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group card-label">
+                        <label for="card_number">Numéro de carte</label>
+                        <input
+                          class="form-control"
+                          id="card_number"
+                          placeholder="1234  5678  9876  5432"
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group card-label">
+                        <label for="expiry_month">Mois d’expiration</label>
+                        <input
+                          class="form-control"
+                          id="expiry_month"
+                          placeholder="MM"
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group card-label">
+                        <label for="expiry_year">Année d’expiration</label>
+                        <input
+                          class="form-control"
+                          id="expiry_year"
+                          placeholder="YY"
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group card-label">
+                        <label for="cvv">CVV</label>
+                        <input class="form-control" id="cvv" type="text" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /Credit Card Payment -->
 
-											<!-- Paypal Payment -->
-											<div class="payment-list">
-												<label class="payment-radio paypal-option">
-													<input type="radio" name="radio" checked>
-													<span class="checkmark"></span>
-													Espèces
-												</label>
-											</div>
-											<!-- /Paypal Payment -->
+                <!-- Paypal Payment -->
+                <div class="payment-list">
+                  <label class="payment-radio paypal-option">
+                    <input type="radio" name="radio" />
+                    <span class="checkmark"></span>
+                    Paypal
+                  </label>
+                </div>
+                <!-- /Paypal Payment -->
 
-											<!-- Credit Card Payment -->
-											<div class="payment-list">
-												<label class="payment-radio credit-card-option">
-													<input type="radio" name="radio" >
-													<span class="checkmark"></span>
-													Carte de crédit
-												</label>
-												<div class="row">
-													<div class="col-md-6">
-														<div class="form-group card-label">
-															<label for="card_name">Nom sur la carte</label>
-															<input class="form-control" id="card_name" type="text">
-														</div>
-													</div>
-													<div class="col-md-6">
-														<div class="form-group card-label">
-															<label for="card_number">Numéro de carte</label>
-															<input class="form-control" id="card_number" placeholder="1234  5678  9876  5432" type="text">
-														</div>
-													</div>
-													<div class="col-md-4">
-														<div class="form-group card-label">
-															<label for="expiry_month">Mois d’expiration</label>
-															<input class="form-control" id="expiry_month" placeholder="MM" type="text">
-														</div>
-													</div>
-													<div class="col-md-4">
-														<div class="form-group card-label">
-															<label for="expiry_year">Année d’expiration</label>
-															<input class="form-control" id="expiry_year" placeholder="YY" type="text">
-														</div>
-													</div>
-													<div class="col-md-4">
-														<div class="form-group card-label">
-															<label for="cvv">CVV</label>
-															<input class="form-control" id="cvv" type="text">
-														</div>
-													</div>
-												</div>
-											</div>
-											<!-- /Credit Card Payment -->
+                <!-- Terms Accept -->
+                <div class="terms-accept">
+                  <div class="custom-checkbox">
+                    <input formControlName="accept" type="checkbox" id="terms_accept"/>
+                    <label for="terms_accept"
+                      >J’ai lu et accepté
+                      <a href="#">Termes &amp; Conditions</a></label
+                    >
+                  </div>
+                </div>
+                <!-- /Terms Accept -->
 
-											<!-- Paypal Payment -->
-											<div class="payment-list">
-												<label class="payment-radio paypal-option">
-													<input type="radio" name="radio">
-													<span class="checkmark"></span>
-													Paypal
-												</label>
-											</div>
-											<!-- /Paypal Payment -->
+                <!-- Submit Section -->
+                <div class="submit-section mt-4">
+                  <button
+                    [disabled]="chekoutForm.invalid"
+                    type="submit"
+                    class="btn btn-primary submit-btn"
+                  >
+                    Confirmer
+                  </button>
+                </div>
+                <!-- /Submit Section -->
+              </div>
+            </form>
+            <!-- /Checkout Form -->
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-5 col-lg-4 theiaStickySidebar">
+        <!-- Booking Summary -->
+        <div class="card booking-card">
+          <div class="card-header">
+            <h4 class="card-title">Résumé de la Réservation</h4>
+          </div>
+          <div class="card-body">
+            <!-- Booking Doctor Info -->
+            <div class="booking-doc-info">
+              <a href="doctor-profile" class="booking-doc-img">
+                <img
+                  src="assets/img/doctors/doctor-thumb-02.jpg"
+                  alt="User Image"
+                />
+              </a>
+              <div class="booking-info">
+                <h4>
+                  <a href="doctor-profile"
+                    >Dr. {{ docteur.docteur_nom }} {{ docteur.prenom }}</a
+                  >
+                </h4>
+                <div class="rating">
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star"></i>
+                  <span class="d-inline-block average-rating">35</span>
+                </div>
+                <div class="clinic-details">
+                  <p class="doc-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    {{ docteur.ville.nom }}, Mr
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- Booking Doctor Info -->
+
+            <div class="booking-summary">
+              <div class="booking-item-wrap">
+                <ul class="booking-date">
+                  <li>
+                    Date
+                    <span>{{ selectedTimeBooking | date: "d MMM y" }}</span>
+                  </li>
+                  <li>
+                    Á l'heure
+                    <span>{{ selectedTimeBooking | date: "H:mm" }}</span>
+                  </li>
+                </ul>
+                <ul class="booking-fee">
+                  <li>
+                    Frais de consultation
+                    <span>{{ docteur.prix_visite }} DH</span>
+                  </li>
+                  <!-- <li>Booking Fee <span>$10</span></li> -->
+                  <!-- <li>Video Call <span>$50</span></li> -->
+                </ul>
+                <div class="booking-total">
+                  <ul class="booking-total-list">
+                    <li>
+                      <span>Total</span>
+                      <span class="total-cost"
+                        >{{ docteur.prix_visite }} DH</span
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /Booking Summary -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Page Content -->
 
 
 
-											<!-- Terms Accept -->
-											<div class="terms-accept">
-												<div class="custom-checkbox">
-												   <input type="checkbox" id="terms_accept">
-												   <label for="terms_accept">J’ai lu et accepté <a href="#">Termes &amp; Conditions</a></label>
-												</div>
-											</div>
-											<!-- /Terms Accept -->
+<!-- Page Content -->
+<div class="content success-page-cont" *ngIf="bookedSuccessfully">
+  <div class="container-fluid">
 
-											<!-- Submit Section -->
-											<div class="submit-section mt-4">
-												<button type="submit" class="btn btn-primary submit-btn">Confirmer</button>
-											</div>
-											<!-- /Submit Section -->
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
 
-										</div>
-									</form>
-									<!-- /Checkout Form -->
+        <!-- Success Card -->
+        <div class="card success-card">
+          <div class="card-body">
+            <div class="success-cont">
+              <i class="fas fa-check"></i>
+              <h3>Le rendez-vous a été pris avec succès!</h3>
+              <p>Rendez-vous réservé avec <strong>Dr. {{ docteur.docteur_nom }} {{ docteur.prenom }}</strong><br> le <strong>{{ selectedTimeBooking | date: "d MMM y" }} Á {{ selectedTimeBooking | date: "H:mm" }}</strong></p>
+              <!-- <a href="invoice-view" class="btn btn-primary view-inv-btn">View Invoice</a> -->
+            </div>
+          </div>
+        </div>
+        <!-- /Success Card -->
 
-								</div>
-							</div>
+      </div>
+    </div>
 
-						</div>
-
-						<div class="col-md-5 col-lg-4 theiaStickySidebar">
-
-							<!-- Booking Summary -->
-							<div class="card booking-card">
-								<div class="card-header">
-									<h4 class="card-title">Résumé de la Réservation</h4>
-								</div>
-								<div class="card-body">
-
-									<!-- Booking Doctor Info -->
-									<div class="booking-doc-info">
-										<a href="doctor-profile" class="booking-doc-img">
-											<img src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
-										</a>
-										<div class="booking-info">
-											<h4><a href="doctor-profile">Dr. {{ docteur.docteur_nom }} {{ docteur.prenom }}</a></h4>
-											<div class="rating">
-												<i class="fas fa-star filled"></i>
-												<i class="fas fa-star filled"></i>
-												<i class="fas fa-star filled"></i>
-												<i class="fas fa-star filled"></i>
-												<i class="fas fa-star"></i>
-												<span class="d-inline-block average-rating">35</span>
-											</div>
-											<div class="clinic-details">
-												<p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{ docteur.ville.nom }}, Mr</p>
-											</div>
-										</div>
-									</div>
-									<!-- Booking Doctor Info -->
-
-									<div class="booking-summary">
-										<div class="booking-item-wrap">
-											<ul class="booking-date">
-												<li>Date <span>{{ selectedTimeBooking |date : 'd MMM y' }}</span></li>
-												<li>Á l'heure <span>{{ selectedTimeBooking |date : 'H:mm'}}</span></li>
-											</ul>
-											<ul class="booking-fee">
-												<li>Frais de consultation <span>{{ docteur.prix_visite }} DH</span></li>
-												<!-- <li>Booking Fee <span>$10</span></li> -->
-												<!-- <li>Video Call <span>$50</span></li> -->
-											</ul>
-											<div class="booking-total">
-												<ul class="booking-total-list">
-													<li>
-														<span>Total</span>
-														<span class="total-cost">{{ docteur.prix_visite }} DH</span>
-													</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- /Booking Summary -->
-
-						</div>
-					</div>
-
-				</div>
-
-			</div>
-            <!-- /Page Content -->
+  </div>
+</div>
+      <!-- /Page Content -->
