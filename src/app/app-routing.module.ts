@@ -1,3 +1,4 @@
+import { DashboardDoctorComponent } from './components/dashboard-doctor/dashboard-doctor.component';
 import { CheckoutDoctorComponent } from './components/checkout-doctor/checkout-doctor.component';
 import { BookingDoctorComponent } from './components/booking-doctor/booking-doctor.component';
 import { ProfileDoctorComponent } from './components/profile-doctor/profile-doctor.component';
@@ -15,6 +16,7 @@ const routes: Routes = [
       { path: ":id/booking", component:BookingDoctorComponent},
       { path: ":id", component:ProfileDoctorComponent},
       { path: ":id/checkout", component:CheckoutDoctorComponent},
+      { path: ":id/dashboard", component:DashboardDoctorComponent},
 
     ]
   }
