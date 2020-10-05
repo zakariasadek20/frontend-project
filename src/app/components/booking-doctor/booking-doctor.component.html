@@ -80,10 +80,10 @@
                         <i class="fa fa-chevron-left"></i>
                       </a>
                     </li>
-                    <li *ngFor="let day of docteur.jourDeTravail">
+                    <li *ngFor="let day of timings">
                       <span> {{ handleDay(day.jour_index) }} </span>
                       <span class="slot-date">{{
-                        handleDate(day.jour_index) | date: "d MMM yyyy"
+                        day.date | date: "d MMM yyyy"
                       }}</span>
                     </li>
 
@@ -107,7 +107,7 @@
                 <!-- Time Slot -->
                 <div class="time-slot">
                   <ul class="clearfix">
-                    <li *ngFor="let day of joursTravail">
+                    <li *ngFor="let day of timings">
                       <a
                         *ngFor="let hour of day.hours"
                         class="timing"
@@ -137,6 +137,7 @@
             [queryParams]="{
               booking: selectedTimeBooking
             }"
+            skipLocationChange
             [disabled]="!selectedTimeBooking"
             class="btn btn-primary submit-btn"
           >

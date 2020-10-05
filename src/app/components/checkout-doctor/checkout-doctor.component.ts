@@ -75,13 +75,17 @@ export class CheckoutDoctorComponent implements OnInit {
       telephone: this.chekoutForm.value.telephone,
       datetime: this.datePipe.transform(
         this.selectedTimeBooking,
-        'y-MM-d H:mm'
+        'y-MM-dd H:mm:ss'
       ),
       docteur_id: this.docteur.docteur_id,
     };
+console.log(data);
 
     this.docteurService.bookingDocteurGestPatient(data).subscribe((rdv) => {
+
+      this.selectedTimeBooking = new Date(rdv['datetime']);
       this.bookedSuccessfully = true;
+      
     });
   }
 }

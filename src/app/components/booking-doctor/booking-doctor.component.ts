@@ -29,7 +29,7 @@ export class BookingDoctorComponent implements OnInit {
   };
 
   // store list of days and hours work
-  joursTravail = [];
+  timings:any = [];
 
   constructor(
     private router: ActivatedRoute,
@@ -46,11 +46,12 @@ export class BookingDoctorComponent implements OnInit {
     this.docteurService.getById(id).subscribe((docteur) => {
       this.docteur = docteur['data'];
       console.log(this.docteur);
+      // this.handelDays(docteur['data'].jourDeTravail);
+    });
 
-      this.handelHours();
-      console.log(this.joursTravail);
-
-      this.handelDays(docteur['data'].jourDeTravail);
+    this.docteurService.getTiming(id).subscribe((timings) => {
+      this.timings=timings;
+      console.log(this.timings);
     });
   }
 
@@ -80,73 +81,15 @@ export class BookingDoctorComponent implements OnInit {
     }
   }
 
-  handleDate(jourIndex) {
-    let currentDate: Date = new Date();
-
-    // Get index day of the week.
-    let currentDayIndex = currentDate.getDay();
-
-    if (jourIndex <= currentDayIndex) {
-      // get difference of days between current day and selected day
-      let diffDays = currentDayIndex - jourIndex;
-      currentDate.setDate(currentDate.getDate() - diffDays);
-      return currentDate;
-    } else {
-      let diffDays = jourIndex - currentDayIndex;
-      currentDate.setDate(currentDate.getDate() + diffDays);
-      return currentDate;
-    }
-  }
-
-  handelHours() {
-    // get list of days  work
-    let jourTravail = this.docteur.jourDeTravail;
-
-    jourTravail.forEach((jour) => {
-      // =>boucle
-      let currentDateString = this.datePipe.transform(
-        this.handleDate(jour.jour_index),
-        'MMMM d y'
-      );
-      let heureDeb: Date = new Date(currentDateString + ' ' + jour.heure_deb);
-      let heurfin: Date = new Date(currentDateString + ' ' + jour.heurs_fin);
-      // store heureDeb in a varialble currenth
-      let currentH: Date = heureDeb;
-      // hours of word for the day we are =>boucle
-      let heures = [];
-      while (currentH <= heurfin) {
-        // check if this hour is valid (not expired)
-        let expired = heureDeb.getTime() < new Date().getTime() ? true : false;
-
-        heures.push({
-          heure: this.datePipe.transform(currentH.getTime(), 'H:mm'),
-          selected: false,
-          expired: expired,
-        });
-        currentH.setMinutes(currentH.getMinutes() + 30);
-      }
-      this.joursTravail.push({
-        date: this.datePipe.transform(
-          this.handleDate(jour.jour_index),
-          'd MMM y'
-        ),
-        hours: heures,
-      });
-    });
-  }
-
   selectedTimeBooking: Date;
 
   selectHoure(hour) {
-    this.joursTravail.forEach((jour) => {
-      jour.hours.forEach((hr) => {
+    this.timings.forEach((day) => {
+      day.hours.forEach((hr) => {
         if (hr === hour) {
           hour.selected = !hour.selected;
           if (hour.selected) {
-            // this.selectedTimeBooking.jour = jour.date;
-            // this.selectedTimeBooking.heure = hour.heure;
-
-            this.selectedTimeBooking = new Date(jour.date + ' ' + hour.heure);
+            this.selectedTimeBooking = new Date(day.date + ' ' + hour.heure);
           } else {
             this.selectedTimeBooking = null;
           }
@@ -155,14 +98,12 @@ export class BookingDoctorComponent implements OnInit {
         }
       });
     });
-
     console.log(this.selectedTimeBooking);
   }
 
   //not Completed
   handelDays(jourDeTravail) {
     let days = [...jourDeTravail];
-
     let currentDayIndex = new Date().getDay();
     // days.forEach(day => {
     //   if (day.jour_index < currentDayIndex) {
@@ -171,10 +112,8 @@ export class BookingDoctorComponent implements OnInit {
     //   }else{
     //     return false;
     //   }
-
     // });
     // restartLoop:
-
     for (let _i = 0; _i < days.length; _i++) {
       if ((days[_i].jour_index as number) < currentDayIndex) {
         const index = _i;
@@ -194,10 +133,8 @@ export class BookingDoctorComponent implements OnInit {
         // lenght=days.length
       }
     }
-
     // days.splice(1, 1);
     // days.splice(1, 1);
-
     console.log(days);
     // console.log(currentDayIndex);
   }

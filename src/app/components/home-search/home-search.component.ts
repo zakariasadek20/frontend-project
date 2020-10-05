@@ -25,10 +25,10 @@ export class HomeSearchComponent implements OnInit {
     let type: string = index == 0 ? 'distance' : 'ville';
     if (type == 'ville') {
       //search by ville
-      this.router.navigate(['/docteur/search'], { queryParams: { type: type, ville: this.searchForm.value.location } });
+      this.router.navigate(['/docteur/search'], { queryParams: { type: type, ville: this.searchForm.value.location ,skipLocationChange: true} });
     } else {
       //search by distance
-      this.router.navigate(['/docteur/search'], { queryParams: { type: type } });
+      this.router.navigate(['/docteur/search'], { queryParams: { type: type } ,skipLocationChange: true});
     }
   }
 
