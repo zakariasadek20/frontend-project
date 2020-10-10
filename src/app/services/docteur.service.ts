@@ -56,4 +56,11 @@ export class DocteurService {
   getTiming(docteurId) {
     return this.http.get(`${environment.baseUrl}/docteurs/${docteurId}/timings`);
   }
+
+  getDoctorAllRendezVous(docteurId){
+    return this.http.get(`${environment.baseUrl}/docteurs/${docteurId}/rendezvous`);
+  }
+
+
+
 }

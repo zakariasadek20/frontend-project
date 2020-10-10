@@ -1,3 +1,4 @@
+import { DocteurService } from './services/docteur.service';
 import { HomeComponent } from './components/partials/home/home.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler, Injectable } from '@angular/core';
@@ -122,7 +123,7 @@ export class SentryErrorHandler implements ErrorHandler {
       apiKey: 'AIzaSyDZQV0uGGIaHm8G2XjdW_kI5ST4mzFJ1qs'
     })
   ],
-  providers: [{ provide: ErrorHandler, useClass: SentryErrorHandler }, DatePipe],
+  providers: [{ provide: ErrorHandler, useClass: SentryErrorHandler }, DatePipe,DocteurService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
