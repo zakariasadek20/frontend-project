@@ -1,3 +1,4 @@
+import { LayoutDashboardDoctorComponent } from './components/dashboards/doctor/layout-dashboard-doctor/layout-dashboard-doctor.component';
 import { DocteurService } from './services/docteur.service';
 import { HomeComponent } from './components/partials/home/home.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -25,7 +26,12 @@ import { BookingDoctorComponent } from './components/booking-doctor/booking-doct
 import { AgmCoreModule } from '@agm/core';
 import { DatePipe } from '@angular/common';
 import { CheckoutDoctorComponent } from './components/checkout-doctor/checkout-doctor.component';
-import { DashboardDoctorComponent } from './components/dashboard-doctor/dashboard-doctor.component';
+import { NgCircleProgressModule } from 'ng-circle-progress';
+import { DashboardDoctorComponent } from './components/dashboards/doctor/dashboard-doctor/dashboard-doctor.component';
+import { AppointmentDashboardDoctorComponent } from './components/dashboards/doctor/appointment-dashboard-doctor/appointment-dashboard-doctor.component';
+import { ModalAppointmentDashboardDoctorComponent } from './components/dashboards/doctor/modal-appointment-dashboard-doctor/modal-appointment-dashboard-doctor.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SidebarDashboardDoctorComponent } from './components/dashboards/doctor/sidebar-dashboard-doctor/sidebar-dashboard-doctor.component';
 
 Sentry.init({
   dsn: "https://f9c730986abe4b5db39f20d6ce29e3a1@o381431.ingest.sentry.io/5378176",
@@ -110,7 +116,12 @@ export class SentryErrorHandler implements ErrorHandler {
     ProfileDoctorComponent,
     BookingDoctorComponent,
     CheckoutDoctorComponent,
+    LayoutDashboardDoctorComponent,
     DashboardDoctorComponent,
+    AppointmentDashboardDoctorComponent,
+    ModalAppointmentDashboardDoctorComponent,
+    SidebarDashboardDoctorComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -122,6 +133,26 @@ export class SentryErrorHandler implements ErrorHandler {
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDZQV0uGGIaHm8G2XjdW_kI5ST4mzFJ1qs'
     })
+    ,
+    NgCircleProgressModule.forRoot({
+      "radius": 39,
+      "space": -6,
+      "outerStrokeWidth": 6,
+      "innerStrokeWidth": 6,
+      "innerStrokeColor": "#e7e8ea",
+      "animateTitle": false,
+      "animationDuration": 1000,
+      "showTitle": false,
+      "showSubtitle": false,
+      "showUnits": false,
+      "showImage": true,
+      "showBackground": false,
+      "showInnerStroke":true,
+      "clockwise": false,
+      "startFromZero": true,
+      "lazy": true}),
+    NgbModule,
+
   ],
   providers: [{ provide: ErrorHandler, useClass: SentryErrorHandler }, DatePipe,DocteurService],
   bootstrap: [AppComponent]

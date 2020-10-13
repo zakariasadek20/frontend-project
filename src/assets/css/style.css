@@ -5138,7 +5138,8 @@ html.menu-opened body {
 	padding: 16px 20px;
 }
 .dashboard-menu > ul > li:hover > a,
-.dashboard-menu > ul > li.active > a {
+.dashboard-menu > ul > li.active > a,
+.dashboard-menu > ul > li > a.active-links {
 	color:#0de0fe;
 }
 .dashboard-menu ul li a i {
