@@ -84,10 +84,7 @@
           >
         </li>
         <li class="nav-item">
-          <a
-            class="nav-link"
-            href="#today-appointments"
-            data-toggle="tab"
+          <a class="nav-link" href="#today-appointments" data-toggle="tab"
             >Today</a
           >
         </li>
@@ -140,23 +137,25 @@
                         <div class="table-action">
                           <a
                             class="btn btn-sm bg-info-light"
-                            (click)="open(rdv.datetime,rdv.status)"
+                            (click)="open(rdv.datetime, rdv.status)"
                           >
                             <i class="far fa-eye"></i> View
                           </a>
 
-                          <a
-                            href="javascript:void(0);"
+                          <button
                             class="btn btn-sm bg-success-light"
+                            (click)="updateRendezVousEtat(rdv, 'accepter')"
+                            [disabled]="rdv.status == 'accepter'"
                           >
                             <i class="fas fa-check"></i> Accept
-                          </a>
-                          <a
-                            href="javascript:void(0);"
+                          </button>
+                          <button
                             class="btn btn-sm bg-danger-light"
+                            (click)="updateRendezVousEtat(rdv, 'refusee')"
+                            [disabled]="rdv.status == 'refusee'"
                           >
                             <i class="fas fa-times"></i> Cancel
-                          </a>
+                          </button>
                         </div>
                       </td>
                     </tr>
@@ -213,23 +212,26 @@
                         <div class="table-action">
                           <a
                             class="btn btn-sm bg-info-light"
-                            (click)="open(rdv.datetime,rdv.status)"
+                            (click)="open(rdv.datetime, rdv.status)"
                           >
                             <i class="far fa-eye"></i> View
                           </a>
 
-                          <a
-                            href="javascript:void(0);"
+                          <button
                             class="btn btn-sm bg-success-light"
+                            (click)="updateRendezVousEtat(rdv, 'accepter')"
+                            [disabled]="rdv.status == 'accepter'"
                           >
                             <i class="fas fa-check"></i> Accept
-                          </a>
-                          <a
-                            href="javascript:void(0);"
+                          </button>
+
+                          <button
                             class="btn btn-sm bg-danger-light"
+                            (click)="updateRendezVousEtat(rdv, 'refusee')"
+                            [disabled]="rdv.status == 'refusee'"
                           >
                             <i class="fas fa-times"></i> Cancel
-                          </a>
+                          </button>
                         </div>
                       </td>
                     </tr>

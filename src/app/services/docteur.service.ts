@@ -40,27 +40,31 @@ export class DocteurService {
     datetime;
     docteur_id;
   }) {
-
     return this.http.post(
       `${environment.baseUrl}/docteurs/rendezVous/guestPatient`,
       data
     );
   }
 
-  checkBooking(datetime){
-    return this.http.post(
-      `${environment.baseUrl}/rendezvous`,
-      datetime
-    );
+  checkBooking(datetime) {
+    return this.http.post(`${environment.baseUrl}/rendezvous`, datetime);
   }
   getTiming(docteurId) {
-    return this.http.get(`${environment.baseUrl}/docteurs/${docteurId}/timings`);
+    return this.http.get(
+      `${environment.baseUrl}/docteurs/${docteurId}/timings`
+    );
   }
 
-  getDoctorAllRendezVous(docteurId){
-    return this.http.get(`${environment.baseUrl}/docteurs/${docteurId}/rendezvous`);
+  getDoctorAllRendezVous(docteurId) {
+    return this.http.get(
+      `${environment.baseUrl}/docteurs/${docteurId}/rendezvous`
+    );
   }
 
-
-
+  updateRendezVousEtat(docteurId, rendezvousId, status) {
+    return this.http.put(
+      `${environment.baseUrl}/docteurs/${docteurId}/rendezvous/${rendezvousId}/etat`,
+      { etat: status }
+    );
+  }
 }

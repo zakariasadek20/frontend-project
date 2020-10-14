@@ -18,17 +18,18 @@ export class AppointmentDashboardDoctorComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private datePipe: DatePipe
   ) {}
-    amount=0;
+  amount = 0;
+  id_docteur;
   ngOnInit(): void {
-    let id = this.activatedRoute.parent.snapshot.paramMap.get('id');
+    this.id_docteur = this.activatedRoute.parent.snapshot.paramMap.get('id');
 
-    this.getdocteurAllRendez(id);
-    this.getAmountDocteur(id);
+    this.getdocteurAllRendez(this.id_docteur);
+    this.getAmountDocteur(this.id_docteur);
   }
 
-  getAmountDocteur(id){
-    this.docteurService.getById(id).subscribe((docteur)=>{
-      this.amount=docteur['data'].prix_visite;
+  getAmountDocteur(id) {
+    this.docteurService.getById(id).subscribe((docteur) => {
+      this.amount = docteur['data'].prix_visite;
     });
   }
   getdocteurAllRendez(id) {
@@ -36,14 +37,22 @@ export class AppointmentDashboardDoctorComponent implements OnInit {
       this.rendezvous = rendezvous['data'];
     });
   }
-  
-  open(datetime,status) {
+
+  open(datetime, status) {
     const modalRef = this.modalService.open(
       ModalAppointmentDashboardDoctorComponent,
       { centered: true }
     );
-    modalRef.componentInstance.datetime =datetime ;
-    modalRef.componentInstance.status =status ;
-    modalRef.componentInstance.amount =this.amount ;
+    modalRef.componentInstance.datetime = datetime;
+    modalRef.componentInstance.status = status;
+    modalRef.componentInstance.amount = this.amount;
+  }
+
+  updateRendezVousEtat(rendezvous, status) {
+    this.docteurService
+      .updateRendezVousEtat(this.id_docteur, rendezvous.id, status)
+      .subscribe((rdv) => {
+        rendezvous.status = status;
+      });
   }
 }
