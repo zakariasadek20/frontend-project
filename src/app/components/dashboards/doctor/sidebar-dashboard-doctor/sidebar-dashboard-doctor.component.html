@@ -2,10 +2,7 @@
   <div class="widget-profile pro-widget-content">
     <div class="profile-info-widget">
       <a href="#" class="booking-doc-img">
-        <img
-          src="assets/img/doctors/doctor-thumb-02.jpg"
-          alt="User Image"
-        />
+        <img src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image" />
       </a>
       <div class="profile-det-info">
         <h3>Dr.{{ docteur.docteur_nom }} {{ docteur.prenom }}</h3>
@@ -24,27 +21,22 @@
     <nav class="dashboard-menu">
       <ul>
         <li>
-          <a
-            [routerLink]="['/docteur', docteur.docteur_id, 'dashboard']"
-            [routerLinkActive]="['active-links']"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
+          <a [routerLink]="['/docteur', docteur.docteur_id, 'dashboard']" [routerLinkActive]="['active-links']"
+            [routerLinkActiveOptions]="{ exact: true }">
             <i class="fas fa-columns"></i>
             <span>Dashboard</span>
           </a>
         </li>
         <li>
-          <a
-            [routerLink]="['/docteur',docteur.docteur_id,'dashboard','appointments']"
-            [routerLinkActive]="['active-links']"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
+          <a [routerLink]="['/docteur',docteur.docteur_id,'dashboard','appointments']"
+            [routerLinkActive]="['active-links']" [routerLinkActiveOptions]="{ exact: true }">
             <i class="fas fa-calendar-check"></i>
             <span>Appointments</span>
           </a>
         </li>
         <li>
-          <a href="my-patients">
+          <a [routerLink]="['/docteur',docteur.docteur_id,'dashboard','patients']" [routerLinkActive]="['active-links']"
+            [routerLinkActiveOptions]="{ exact: true}">
             <i class="fas fa-user-injured"></i>
             <span>My Patients</span>
           </a>
