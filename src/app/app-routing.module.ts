@@ -1,3 +1,4 @@
+import { ScheduleTimingsDashboardDoctorComponent } from './components/dashboards/doctor/schedule-timings-dashboard-doctor/schedule-timings-dashboard-doctor.component';
 import { PatientDashboardDoctorComponent } from './components/dashboards/doctor/patient-dashboard-doctor/patient-dashboard-doctor.component';
 import { DashboardDoctorComponent } from './components/dashboards/doctor/dashboard-doctor/dashboard-doctor.component';
 import { LayoutDashboardDoctorComponent } from './components/dashboards/doctor/layout-dashboard-doctor/layout-dashboard-doctor.component';
@@ -26,7 +27,8 @@ const routes: Routes = [
         children: [
           { path: '', component: DashboardDoctorComponent },
           { path: 'appointments', component: AppointmentDashboardDoctorComponent },
-          {path:'patients',component: PatientDashboardDoctorComponent }
+          {path:'patients',component: PatientDashboardDoctorComponent },
+          {path:'timings',component: ScheduleTimingsDashboardDoctorComponent }
       ],
       },
     ],
@@ -34,7 +36,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{onSameUrlNavigation:'reload'})],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

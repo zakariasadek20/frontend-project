@@ -51,7 +51,7 @@ export class DocteurService {
   }
   getTiming(docteurId) {
     return this.http.get(
-      `${environment.baseUrl}/docteurs/${docteurId}/timings`
+      `${environment.baseUrl}/docteurs/${docteurId}/jourDeTravails`
     );
   }
 
@@ -65,6 +65,19 @@ export class DocteurService {
     return this.http.put(
       `${environment.baseUrl}/docteurs/${docteurId}/rendezvous/${rendezvousId}/etat`,
       { etat: status }
+    );
+  }
+
+  storeJourDeTravail(docteurId,data: { jour_index; heure_deb; heure_fin }) {
+    return this.http.post(
+      `${environment.baseUrl}/docteurs/${docteurId}/jourDeTravails`,
+      data
+    );
+  }
+
+  destroyJourDeTravailById(docteurId,jour_id) {
+    return this.http.delete(
+      `${environment.baseUrl}/docteurs/${docteurId}/jourDeTravails/${jour_id}`
     );
   }
 }

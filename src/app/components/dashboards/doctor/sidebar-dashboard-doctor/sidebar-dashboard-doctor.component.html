@@ -21,28 +21,56 @@
     <nav class="dashboard-menu">
       <ul>
         <li>
-          <a [routerLink]="['/docteur', docteur.docteur_id, 'dashboard']" [routerLinkActive]="['active-links']"
-            [routerLinkActiveOptions]="{ exact: true }">
+          <a
+            [routerLink]="['/docteur', docteur.docteur_id, 'dashboard']"
+            [routerLinkActive]="['active-links']"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
             <i class="fas fa-columns"></i>
             <span>Dashboard</span>
           </a>
         </li>
         <li>
-          <a [routerLink]="['/docteur',docteur.docteur_id,'dashboard','appointments']"
-            [routerLinkActive]="['active-links']" [routerLinkActiveOptions]="{ exact: true }">
+          <a
+            [routerLink]="[
+              '/docteur',
+              docteur.docteur_id,
+              'dashboard',
+              'appointments'
+            ]"
+            [routerLinkActive]="['active-links']"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
             <i class="fas fa-calendar-check"></i>
             <span>Appointments</span>
           </a>
         </li>
         <li>
-          <a [routerLink]="['/docteur',docteur.docteur_id,'dashboard','patients']" [routerLinkActive]="['active-links']"
-            [routerLinkActiveOptions]="{ exact: true}">
+          <a
+            [routerLink]="[
+              '/docteur',
+              docteur.docteur_id,
+              'dashboard',
+              'patients'
+            ]"
+            [routerLinkActive]="['active-links']"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
             <i class="fas fa-user-injured"></i>
             <span>My Patients</span>
           </a>
         </li>
         <li>
-          <a href="schedule-timings">
+          <a
+            [routerLink]="[
+              '/docteur',
+              docteur.docteur_id,
+              'dashboard',
+              'timings'
+            ]"
+            [routerLinkActive]="['active-links']"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
             <i class="fas fa-hourglass-start"></i>
             <span>Schedule Timings</span>
           </a>

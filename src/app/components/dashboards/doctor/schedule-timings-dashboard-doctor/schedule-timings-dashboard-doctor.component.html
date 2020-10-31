@@ -1,0 +1,622 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Schedule Timings</h4>
+        <div class="profile-box">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="form-group">
+                <!-- <label>Timing Slot Duration</label>
+                <select class="select form-control">
+                  <option>-</option>
+                  <option>15 mins</option>
+                  <option selected="selected">30 mins</option>
+                  <option>45 mins</option>
+                  <option>1 Hour</option>
+                </select> -->
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card schedule-widget mb-0">
+                <!-- Schedule Header -->
+                <div class="schedule-header">
+                  <!-- Schedule Nav -->
+                  <div class="schedule-nav">
+                    <ul class="nav nav-tabs nav-justified">
+                      <li
+                        *ngFor="let jour of jourDeTravail; index as i"
+                        class="nav-item"
+                      >
+                        <a
+                          class="nav-link"
+                          [ngClass]="{ active: selectedDay - 1 === i }"
+                          data-toggle="tab"
+                          [href]="handleId(jour.jour_index)"
+                          >{{ handleDay(jour.jour_index) }}</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                  <!-- /Schedule Nav -->
+                </div>
+                <!-- /Schedule Header -->
+
+                <!-- Schedule Content -->
+                <div class="tab-content schedule-cont" >
+                  <!-- Sunday Slot -->
+                  <div
+                    *ngIf="
+                      jourDeTravail.length > 0 && jourDeTravail[0].jour_id == 0;
+                      else elseDay1
+                    "
+                    id="slot_sunday"
+                    class="tab-pane fade"
+                    [ngClass]="{
+                      show: selectedDay == 1,
+                      active: selectedDay == 1
+                    }"
+                  >
+                    <h4 class="card-title d-flex justify-content-between">
+                      <span>Time Slots</span>
+                      <a
+                        data-toggle="modal"
+                        class="edit-link"
+                        href="javascript:void(0)"
+                        (click)="add(1)"
+                      >
+                        <i class="fa fa-plus-circle"></i> Add Slot
+                      </a>
+                    </h4>
+                    <p class="text-muted mb-0">Not Available</p>
+                  </div>
+                  <ng-template  #elseDay1>
+                    <div
+                      *ngIf="jourDeTravail.length > 0"
+                      id="slot_sunday"
+                      class="tab-pane fade"
+                      [ngClass]="{
+                        show: selectedDay == 1,
+                        active: selectedDay == 1
+                      }"
+                    >
+                      <h4 class="card-title d-flex justify-content-between">
+                        <span>Time Slots</span>
+                        <a
+                          class="edit-link"
+                          data-toggle="modal"
+                          href="javascript:void(0)"
+                          (click)="edit(jourDeTravail[0])"
+                          ><i class="fa fa-edit mr-1"></i>Edit</a
+                        >
+                      </h4>
+
+                      <!-- Slot List -->
+                      <div class="doc-times">
+                        <div class="doc-slot-list" (click)="edit(jourDeTravail[0])">
+                          {{ jourDeTravail[0].heure_deb }} -
+                          {{ jourDeTravail[0].heure_fin }}
+                          <a
+                            class="delete_schedule"
+                            (click)="delete(jourDeTravail[0]);$event.stopPropagation()"
+                          >
+                            <i class="fa fa-times"></i>
+                          </a>
+                        </div>
+                        <!-- <div class="doc-slot-list">
+                          11:30 pm - 1:30 pm
+                          <a href="javascript:void(0)" class="delete_schedule">
+                            <i class="fa fa-times"></i>
+                          </a>
+                        </div>
+                        <div class="doc-slot-list">
+                          3:00 pm - 5:00 pm
+                          <a href="javascript:void(0)" class="delete_schedule">
+                            <i class="fa fa-times"></i>
+                          </a>
+                        </div>
+                        <div class="doc-slot-list">
+                          6:00 pm - 11:00 pm
+                          <a href="javascript:void(0)" class="delete_schedule">
+                            <i class="fa fa-times"></i>
+                          </a>
+                        </div> -->
+                      </div>
+                      <!-- /Slot List -->
+                    </div>
+                  </ng-template>
+
+                  <!-- /Sunday Slot -->
+
+                  <!-- Monday Slot -->
+                  <div
+                    *ngIf="
+                      jourDeTravail.length > 1 &&
+                        jourDeTravail[1].jour_id === 0;
+                      else elseDay2
+                    "
+                    id="slot_monday"
+                    class="tab-pane fade"
+                    [ngClass]="{
+                      show: selectedDay == 2,
+                      active: selectedDay == 2
+                    }"
+                  >
+                    <h4 class="card-title d-flex justify-content-between">
+                      <span>Time Slots</span>
+                      <a data-toggle="modal" class="edit-link" href="javascript:void(0)" (click)="add(2)" >
+                        <i class="fa fa-plus-circle"></i> Add Slot
+                      </a>
+                    </h4>
+                    <p class="text-muted mb-0">Not Available</p>
+                  </div>
+                  <ng-template #elseDay2>
+                    <div
+                      *ngIf="jourDeTravail.length > 1"
+                      id="slot_monday"
+                      class="tab-pane fade"
+                      [ngClass]="{
+                        show: selectedDay == 2,
+                        active: selectedDay == 2
+                      }"
+                    >
+                      <h4 class="card-title d-flex justify-content-between">
+                        <span>Time Slots</span>
+                        <a
+                          class="edit-link"
+                          data-toggle="modal"
+                          href="javascript:void(0)"
+                          (click)="edit(jourDeTravail[1])"
+                          ><i class="fa fa-edit mr-1"></i>Edit</a
+                        >
+                      </h4>
+
+                      <!-- Slot List -->
+                      <div class="doc-times">
+                        <div class="doc-slot-list" (click)="edit(jourDeTravail[1])">
+                          {{ jourDeTravail[1].heure_deb }} -
+                          {{ jourDeTravail[1].heure_fin }}
+                          <a
+                            (click)="delete(jourDeTravail[1]);$event.stopPropagation()"
+                            class="delete_schedule"
+                          >
+                            <i class="fa fa-times"></i>
+                          </a>
+                        </div>
+                        <!-- <div class="doc-slot-list">
+                          11:30 pm - 1:30 pm
+                          <a href="javascript:void(0)" class="delete_schedule">
+                            <i class="fa fa-times"></i>
+                          </a>
+                        </div>
+                        <div class="doc-slot-list">
+                          3:00 pm - 5:00 pm
+                          <a href="javascript:void(0)" class="delete_schedule">
+                            <i class="fa fa-times"></i>
+                          </a>
+                        </div>
+                        <div class="doc-slot-list">
+                          6:00 pm - 11:00 pm
+                          <a href="javascript:void(0)" class="delete_schedule">
+                            <i class="fa fa-times"></i>
+                          </a>
+                        </div> -->
+                      </div>
+                      <!-- /Slot List -->
+                    </div>
+                  </ng-template>
+
+                  <!-- /Monday Slot -->
+
+                  <!-- Tuesday Slot -->
+                  <div
+                    *ngIf="
+                      jourDeTravail.length > 2 &&
+                        jourDeTravail[2].jour_id === 0;
+                      else elseDay3
+                    "
+                    id="slot_tuesday"
+                    class="tab-pane fade"
+                    [ngClass]="{
+                      show: selectedDay == 3,
+                      active: selectedDay == 3
+                    }"
+                  >
+                    <h4 class="card-title d-flex justify-content-between">
+                      <span>Time Slots</span>
+                      <a data-toggle="modal" class="edit-link" href="javascript:void(0)" (click)="add(3)">
+                        <i class="fa fa-plus-circle"></i> Add Slot
+                      </a>
+                    </h4>
+                    <p class="text-muted mb-0">Not Available</p>
+                  </div>
+                  <ng-template #elseDay3>
+                    <div
+                      *ngIf="jourDeTravail.length > 2"
+                      id="slot_tuesday"
+                      class="tab-pane fade"
+                      [ngClass]="{
+                        show: selectedDay == 3,
+                        active: selectedDay == 3
+                      }"
+                    >
+                      <h4 class="card-title d-flex justify-content-between">
+                        <span>Time Slots</span>
+                        <a
+                          class="edit-link"
+                          data-toggle="modal"
+                          href="javascript:void(0)"
+                          (click)="edit(jourDeTravail[2])"
+                          ><i class="fa fa-edit mr-1"></i>Edit</a
+                        >
+                      </h4>
+
+                      <!-- Slot List -->
+                      <div class="doc-times">
+                        <div class="doc-slot-list" (click)="edit(jourDeTravail[2])">
+                          {{ jourDeTravail[2].heure_deb }} -
+                          {{ jourDeTravail[2].heure_fin }}
+                          <a
+                            (click)="delete(jourDeTravail[2]);$event.stopPropagation()"
+                            class="delete_schedule"
+                          >
+                            <i class="fa fa-times"></i>
+                          </a>
+                        </div>
+                        <!-- <div class="doc-slot-list">
+                          11:30 pm - 1:30 pm
+                          <a href="javascript:void(0)" class="delete_schedule">
+                            <i class="fa fa-times"></i>
+                          </a>
+                        </div>
+                        <div class="doc-slot-list">
+                          3:00 pm - 5:00 pm
+                          <a href="javascript:void(0)" class="delete_schedule">
+                            <i class="fa fa-times"></i>
+                          </a>
+                        </div>
+                        <div class="doc-slot-list">
+                          6:00 pm - 11:00 pm
+                          <a href="javascript:void(0)" class="delete_schedule">
+                            <i class="fa fa-times"></i>
+                          </a>
+                        </div> -->
+                      </div>
+                      <!-- /Slot List -->
+                    </div>
+                  </ng-template>
+
+                  <!-- /Tuesday Slot -->
+
+                  <!-- Wednesday Slot -->
+                  <div
+                    *ngIf="
+                      jourDeTravail.length > 3 &&
+                        jourDeTravail[3].jour_id === 0;
+                      else elseDay4
+                    "
+                    id="slot_wednesday"
+                    class="tab-pane fade"
+                    [ngClass]="{
+                      show: selectedDay == 4,
+                      active: selectedDay == 4
+                    }"
+                  >
+                    <h4 class="card-title d-flex justify-content-between">
+                      <span>Time Slots</span>
+                      <a data-toggle="modal" class="edit-link" href="javascript:void(0)" (click)="add(4)">
+                        <i class="fa fa-plus-circle"></i> Add Slot
+                      </a>
+                    </h4>
+                    <p class="text-muted mb-0">Not Available</p>
+                  </div>
+                  <ng-template #elseDay4>
+                    <div
+                      *ngIf="jourDeTravail.length > 3"
+                      id="slot_wednesday"
+                      class="tab-pane fade"
+                      [ngClass]="{
+                        show: selectedDay == 4,
+                        active: selectedDay == 4
+                      }"
+                    >
+                      <h4 class="card-title d-flex justify-content-between">
+                        <span>Time Slots</span>
+                        <a
+                          class="edit-link"
+                          data-toggle="modal"
+                          href="javascript:void(0)"
+                          (click)="edit(jourDeTravail[3])"
+                          ><i class="fa fa-edit mr-1"></i>Edit</a
+                        >
+                      </h4>
+
+                      <!-- Slot List -->
+                      <div class="doc-times">
+                        <div class="doc-slot-list" (click)="edit(jourDeTravail[3])">
+                          {{ jourDeTravail[3].heure_deb }} -
+                          {{ jourDeTravail[3].heure_fin }}
+                          <a
+                            (click)="delete(jourDeTravail[3]);$event.stopPropagation()"
+                            class="delete_schedule"
+                          >
+                            <i class="fa fa-times"></i>
+                          </a>
+                        </div>
+                        <!-- <div class="doc-slot-list">
+                          11:30 pm - 1:30 pm
+                          <a href="javascript:void(0)" class="delete_schedule">
+                            <i class="fa fa-times"></i>
+                          </a>
+                        </div>
+                        <div class="doc-slot-list">
+                          3:00 pm - 5:00 pm
+                          <a href="javascript:void(0)" class="delete_schedule">
+                            <i class="fa fa-times"></i>
+                          </a>
+                        </div>
+                        <div class="doc-slot-list">
+                          6:00 pm - 11:00 pm
+                          <a href="javascript:void(0)" class="delete_schedule">
+                            <i class="fa fa-times"></i>
+                          </a>
+                        </div> -->
+                      </div>
+                      <!-- /Slot List -->
+                    </div>
+                  </ng-template>
+
+                  <!-- /Wednesday Slot -->
+
+                  <!-- Thursday Slot -->
+                  <div
+                    *ngIf="
+                      jourDeTravail.length > 4 &&
+                        jourDeTravail[4].jour_id === 0;
+                      else elseDay5
+                    "
+                    id="slot_thursday"
+                    class="tab-pane fade"
+                    [ngClass]="{
+                      show: selectedDay == 5,
+                      active: selectedDay == 5
+                    }"
+                  >
+                    <h4 class="card-title d-flex justify-content-between">
+                      <span>Time Slots</span>
+                      <a data-toggle="modal" class="edit-link" href="javascript:void(0)" (click)="add(5)">
+                        <i class="fa fa-plus-circle"></i> Add Slot
+                      </a>
+                    </h4>
+                    <p class="text-muted mb-0">Not Available</p>
+                  </div>
+
+                  <ng-template #elseDay5>
+                    <div
+                      *ngIf="jourDeTravail.length > 4"
+                      id="slot_thursday"
+                      class="tab-pane fade"
+                      [ngClass]="{
+                        show: selectedDay == 5,
+                        active: selectedDay == 5
+                      }"
+                    >
+                      <h4 class="card-title d-flex justify-content-between">
+                        <span>Time Slots</span>
+                        <a
+                          class="edit-link"
+                          data-toggle="modal"
+                          href="javascript:void(0)"
+                          (click)="edit(jourDeTravail[4])"
+                          ><i class="fa fa-edit mr-1"></i>Edit</a
+                        >
+                      </h4>
+
+                      <!-- Slot List -->
+                      <div class="doc-times">
+                        <div class="doc-slot-list" (click)="edit(jourDeTravail[4])">
+                          {{ jourDeTravail[4].heure_deb }} -
+                          {{ jourDeTravail[4].heure_fin }}
+                          <a
+                            (click)="delete(jourDeTravail[4]);$event.stopPropagation()"
+                            class="delete_schedule"
+                          >
+                            <i class="fa fa-times"></i>
+                          </a>
+                        </div>
+                        <!-- <div class="doc-slot-list">
+                          11:30 pm - 1:30 pm
+                          <a href="javascript:void(0)" class="delete_schedule">
+                            <i class="fa fa-times"></i>
+                          </a>
+                        </div>
+                        <div class="doc-slot-list">
+                          3:00 pm - 5:00 pm
+                          <a href="javascript:void(0)" class="delete_schedule">
+                            <i class="fa fa-times"></i>
+                          </a>
+                        </div>
+                        <div class="doc-slot-list">
+                          6:00 pm - 11:00 pm
+                          <a href="javascript:void(0)" class="delete_schedule">
+                            <i class="fa fa-times"></i>
+                          </a>
+                        </div> -->
+                      </div>
+                      <!-- /Slot List -->
+                    </div>
+                  </ng-template>
+
+                  <!-- /Thursday Slot -->
+
+                  <!-- Friday Slot -->
+                  <div
+                    *ngIf="
+                      jourDeTravail.length > 5 &&
+                        jourDeTravail[5].jour_id === 0;
+                      else elseDay6
+                    "
+                    id="slot_friday"
+                    class="tab-pane fade"
+                    [ngClass]="{
+                      show: selectedDay == 6,
+                      active: selectedDay == 6
+                    }"
+                  >
+                    <h4 class="card-title d-flex justify-content-between">
+                      <span>Time Slots</span>
+                      <a data-toggle="modal" class="edit-link" href="javascript:void(0)" (click)="add(6)">
+                        <i class="fa fa-plus-circle"></i> Add Slot
+                      </a>
+                    </h4>
+                    <p class="text-muted mb-0">Not Available</p>
+                  </div>
+                  <ng-template #elseDay6>
+                    <div
+                    *ngIf="jourDeTravail.length > 5"
+                      id="slot_friday"
+                      class="tab-pane fade"
+                      [ngClass]="{
+                        show: selectedDay == 6,
+                        active: selectedDay == 6
+                      }"
+                    >
+                      <h4 class="card-title d-flex justify-content-between">
+                        <span>Time Slots</span>
+                        <a
+                          class="edit-link"
+                          data-toggle="modal"
+                          href="javascript:void(0)"
+                          (click)="edit(jourDeTravail[5])"
+                          ><i class="fa fa-edit mr-1"></i>Edit</a
+                        >
+                      </h4>
+
+                      <!-- Slot List -->
+                      <div class="doc-times">
+                        <div class="doc-slot-list" (click)="edit(jourDeTravail[5])">
+                          {{ jourDeTravail[5].heure_deb }} -
+                          {{ jourDeTravail[5].heure_fin }}
+                          <a
+                            (click)="delete(jourDeTravail[5]);$event.stopPropagation()"
+                            class="delete_schedule"
+                          >
+                            <i class="fa fa-times"></i>
+                          </a>
+                        </div>
+                        <!-- <div class="doc-slot-list">
+                        11:30 pm - 1:30 pm
+                        <a href="javascript:void(0)" class="delete_schedule">
+                          <i class="fa fa-times"></i>
+                        </a>
+                      </div>
+                      <div class="doc-slot-list">
+                        3:00 pm - 5:00 pm
+                        <a href="javascript:void(0)" class="delete_schedule">
+                          <i class="fa fa-times"></i>
+                        </a>
+                      </div>
+                      <div class="doc-slot-list">
+                        6:00 pm - 11:00 pm
+                        <a href="javascript:void(0)" class="delete_schedule">
+                          <i class="fa fa-times"></i>
+                        </a>
+                      </div> -->
+                      </div>
+                      <!-- /Slot List -->
+                    </div>
+                  </ng-template>
+
+                  <!-- /Friday Slot -->
+
+                  <!-- Saturday Slot -->
+                  <div
+                    *ngIf="
+                      jourDeTravail.length > 6 &&
+                        jourDeTravail[6].jour_id === 0;
+                      else elseDay7
+                    "
+                    id="slot_saturday"
+                    class="tab-pane fade"
+                    [ngClass]="{
+                      show: selectedDay == 7,
+                      active: selectedDay == 7
+                    }"
+                  >
+                    <h4 class="card-title d-flex justify-content-between">
+                      <span>Time Slots</span>
+                      <a data-toggle="modal" class="edit-link" href="javascript:void(0)" (click)="add(7)">
+                        <i class="fa fa-plus-circle"></i> Add Slot
+                      </a>
+                    </h4>
+                    <p class="text-muted mb-0">Not Available</p>
+                  </div>
+                  <ng-template #elseDay7>
+                    <div
+                    *ngIf="jourDeTravail.length > 6"
+                      id="slot_saturday"
+                      class="tab-pane fade"
+                      [ngClass]="{
+                        show: selectedDay == 7,
+                        active: selectedDay == 7
+                      }"
+                    >
+                      <h4 class="card-title d-flex justify-content-between">
+                        <span>Time Slots</span>
+                        <a
+                          class="edit-link"
+                          data-toggle="modal"
+                          href="javascript:void(0)"
+                          (click)="edit(jourDeTravail[6])"
+                          ><i class="fa fa-edit mr-1"></i>Edit</a
+                        >
+                      </h4>
+
+                      <!-- Slot List -->
+                      <div class="doc-times">
+                        <div class="doc-slot-list" (click)="edit(jourDeTravail[6])">
+                          {{ jourDeTravail[6].heure_deb }} -
+                          {{ jourDeTravail[6].heure_fin }}
+                          <a
+                            (click)="delete(jourDeTravail[6]);$event.stopPropagation()"
+                            class="delete_schedule"
+                          >
+                            <i class="fa fa-times"></i>
+                          </a>
+                        </div>
+                        <!-- <div class="doc-slot-list">
+                        11:30 pm - 1:30 pm
+                        <a href="javascript:void(0)" class="delete_schedule">
+                          <i class="fa fa-times"></i>
+                        </a>
+                      </div>
+                      <div class="doc-slot-list">
+                        3:00 pm - 5:00 pm
+                        <a href="javascript:void(0)" class="delete_schedule">
+                          <i class="fa fa-times"></i>
+                        </a>
+                      </div>
+                      <div class="doc-slot-list">
+                        6:00 pm - 11:00 pm
+                        <a href="javascript:void(0)" class="delete_schedule">
+                          <i class="fa fa-times"></i>
+                        </a>
+                      </div> -->
+                      </div>
+                      <!-- /Slot List -->
+                    </div>
+                  </ng-template>
+
+                  <!-- /Saturday Slot -->
+                </div>
+                <!-- /Schedule Content -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
